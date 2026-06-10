@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "ElektriKamus – Kamus Instalasi Listrik Rumah",
-  description: "Panduan visual lengkap instalasi listrik rumah tangga.",
+  title: "E-Modul | Instalasi Listrik Rumah",
+  description: "Panduan visual lengkap instalasi listrik rumah.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

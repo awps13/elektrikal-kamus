@@ -1,5 +1,5 @@
 // ════════════════════════════════════════════════════════════════════════════
-// MODUL PEMBELAJARAN — INSTALASI LISTRIK RUMAH TANGGA
+// MODUL PEMBELAJARAN — INSTALASI LISTRIK RUMAH
 // Materi terstruktur 6 bab + evaluasi 15 soal pilihan ganda.
 // Acuan: PUIL 2011 (SNI 0225:2011) & standar PLN.
 // ════════════════════════════════════════════════════════════════════════════
@@ -13,7 +13,10 @@ export type Blok =
   | { tipe: "info"; varian: "info" | "bahaya" | "tips" | "catatan"; judul: string; teks: string }
   | { tipe: "tabel"; kolom: string[]; baris: string[][] }
   | { tipe: "simbol" } // memicu galeri simbol kelistrikan (dirender di komponen)
-  | { tipe: "diagram" }; // memicu diagram pengawatan rumah (dirender di komponen)
+  | { tipe: "diagram" } // memicu diagram pengawatan rumah (dirender di komponen)
+  | { tipe: "apd" } // memicu galeri ilustrasi Alat Pelindung Diri (dirender di komponen)
+  | { tipe: "komponen-list"; items: { ikon: string; nama: string; teks: string; gambar?: string }[] } // kartu komponen + foto (gambar: URL/path opsional)
+  | { tipe: "video"; youtube: string; judul?: string }; // video YouTube tertanam (youtube: ID video)
 
 export interface Bab {
   id: string;
@@ -32,7 +35,7 @@ const bab1: Bab = {
   no: 1,
   judul: "Pengertian Instalasi Listrik",
   ikon: "💡",
-  ringkasan: "Memahami definisi, tujuan, jenis, dan dasar hukum instalasi listrik rumah tangga.",
+  ringkasan: "Memahami definisi, tujuan, jenis, dan dasar hukum instalasi listrik rumah.",
   estimasiMenit: 10,
   tujuan: [
     "Menjelaskan pengertian instalasi listrik dengan benar.",
@@ -157,6 +160,9 @@ const bab2: Bab = {
       teks: "Alat Pelindung Diri (APD)",
     },
     {
+      tipe: "apd",
+    },
+    {
       tipe: "tabel",
       kolom: ["APD", "Fungsi"],
       baris: [
@@ -232,13 +238,13 @@ const bab3: Bab = {
       teks: "1. Komponen Sumber & Pengaman",
     },
     {
-      tipe: "poin",
+      tipe: "komponen-list",
       items: [
-        "kWh Meter — alat ukur milik PLN yang mencatat pemakaian energi (kilowatt-hour) untuk penagihan.",
-        "PHB / Box Panel (Perlengkapan Hubung Bagi) — kotak tempat MCB & pengaman, pusat distribusi listrik rumah.",
-        "MCB (Miniature Circuit Breaker) — memutus arus otomatis saat overload/korsleting.",
-        "ELCB / RCCB — mendeteksi kebocoran arus sekecil 30 mA dan memutus daya untuk melindungi nyawa.",
-        "Sekring (fuse) — pengaman lebur model lama; putus saat arus berlebih (kini banyak digantikan MCB).",
+        { ikon: "kwh", nama: "kWh Meter", teks: "Alat ukur milik PLN yang mencatat pemakaian energi (kilowatt-hour) untuk penagihan.", gambar: "https://www.panggung.com/pecwp/wp-content/uploads/2016/06/kwh-meter-2.jpg" },
+        { ikon: "phb", nama: "PHB / Box Panel", teks: "Kotak tempat MCB & pengaman — pusat distribusi listrik rumah (Perlengkapan Hubung Bagi).", gambar: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGSedmNm-wH3wmP4mcisMUb4chTWxep5HoHCPHgFzeX7PhojcJHLEfaNesputcJWM415Rm1PU3Zroz2mM293ZvC49r-NE8R0mYrYMuvKB1i_oMbK9eC9E6VMu3mJROFdFkwfz_Z3w3fKs/s1600/panel+hubung+bagi.jpg" },
+        { ikon: "mcb", nama: "MCB", teks: "Miniature Circuit Breaker — memutus arus otomatis saat overload/korsleting.", gambar: "https://www.sinarlistrik.com/wp-content/uploads/2019/08/MCB-2.png" },
+        { ikon: "elcb", nama: "ELCB / RCCB", teks: "Mendeteksi kebocoran arus sekecil 30 mA dan memutus daya untuk melindungi nyawa.", gambar: "https://down-id.img.susercontent.com/file/id-11134207-7r992-lrq8neaj9veu47" },
+        { ikon: "sekring", nama: "Sekring (Fuse)", teks: "Pengaman lebur model lama; putus saat arus berlebih (kini banyak digantikan MCB).", gambar: "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-4700618/best-seller_best-seller-sekring-fuse-colok-besar-10-a-_full01.jpg" },
       ],
     },
     {
@@ -246,12 +252,12 @@ const bab3: Bab = {
       teks: "2. Komponen Penghubung & Kontrol",
     },
     {
-      tipe: "poin",
+      tipe: "komponen-list",
       items: [
-        "Saklar (switch) — memutus/menyambung aliran ke lampu. Jenis: tunggal, seri (ganda), tukar (hotel), silang.",
-        "Stop kontak (outlet) — titik sambungan untuk peralatan; gunakan tipe 3 lubang (berarde) untuk keamanan.",
-        "Steker (plug) — colokan pada ujung kabel peralatan yang dimasukkan ke stop kontak.",
-        "Kotak sambung (T-dus / kotak cabang) — tempat penyambungan kabel agar rapi dan aman.",
+        { ikon: "saklar", nama: "Saklar (Switch)", teks: "Memutus/menyambung aliran ke lampu. Jenis: tunggal, seri (ganda), tukar (hotel), silang.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRorS5p5Jc7aHYKhy1tZDIHmsTUcFk6afGzjA&s" },
+        { ikon: "stopkontak", nama: "Stop Kontak (Outlet)", teks: "Titik sambungan untuk peralatan; gunakan tipe 3 lubang (berarde) untuk keamanan.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhiK03i3v6xlFn1uEMM1kE0ljO2cJVYP2KTw&s" },
+        { ikon: "steker", nama: "Steker (Plug)", teks: "Colokan pada ujung kabel peralatan yang dimasukkan ke stop kontak.", gambar: "http://image.indonetwork.co.id/products/thumbs/500x500/2025/07/16/d8536d4d-35ce-49a8-a2ec-0a007670551f.jpg" },
+        { ikon: "kotaksambung", nama: "Kotak Sambung (T-dus)", teks: "Tempat penyambungan kabel agar rapi dan aman.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ-vkaYfoaq2QzTYVjwFWUaksETFuT6SPNFw&s" },
       ],
     },
     {
@@ -259,12 +265,12 @@ const bab3: Bab = {
       teks: "3. Komponen Beban & Pelengkap",
     },
     {
-      tipe: "poin",
+      tipe: "komponen-list",
       items: [
-        "Fitting lampu — dudukan tempat memasang lampu (fitting plafon/gantung).",
-        "Lampu — beban penerangan (LED, TL, pijar).",
-        "Penghantar/kabel — NYA (inti tunggal), NYM (berselubung 2–4 inti), NYY (untuk tanam tanah).",
-        "Pembumian (grounding/arde) — menyalurkan arus bocor ke bumi sebagai pengaman.",
+        { ikon: "fitting", nama: "Fitting Lampu", teks: "Dudukan tempat memasang lampu (fitting plafon/gantung).", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXxCoDho0-1yOw6lxjnF7KNw_vdmJOwrpJSw&s" },
+        { ikon: "lampu", nama: "Lampu", teks: "Beban penerangan (LED, TL, pijar).", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK8ShB-Bfox2G1T_oSe_r2jRHqGlU8TywI2w&s" },
+        { ikon: "kabel", nama: "Penghantar / Kabel", teks: "NYA (inti tunggal), NYM (berselubung 2–4 inti), NYY (untuk tanam tanah).", gambar: "https://kitani.co.id/wp-content/uploads/2025/08/kabel-NYA-NYM-dan-NYY.webp" },
+        { ikon: "pembumian", nama: "Pembumian (Arde)", teks: "Menyalurkan arus bocor ke bumi sebagai pengaman.", gambar: "https://filebroker-cdn.lazada.co.id/kf/S4dfbd680756a4cf19ec450fe9de1dd8eV.jpg" },
       ],
     },
     {
@@ -417,6 +423,11 @@ const bab5: Bab = {
       teks: "Langkah Umum Pemasangan Instalasi Rumah",
     },
     {
+      tipe: "video",
+      youtube: "AG6c6ix4WqE",
+      judul: "Tutorial pemasangan instalasi listrik rumah",
+    },
+    {
       tipe: "langkah",
       items: [
         "Buat gambar rencana (denah titik lampu, saklar, stop kontak) & hitung kebutuhan bahan.",
@@ -439,65 +450,44 @@ const bab5: Bab = {
   ],
 };
 
-// ── BAB 6 — ALAT DAN BAHAN INSTALASI LISTRIK ─────────────────────────────────
+// ── BAB 6 — ALAT INSTALASI LISTRIK ───────────────────────────────────────────
 const bab6: Bab = {
   id: "alat-bahan",
   no: 6,
-  judul: "Alat & Bahan Instalasi Listrik",
+  judul: "Alat Instalasi Listrik",
   ikon: "🔧",
-  ringkasan: "Daftar peralatan kerja (tools) dan material (bahan) yang dibutuhkan beserta fungsinya.",
-  estimasiMenit: 10,
+  ringkasan: "Daftar peralatan kerja (tools) yang dibutuhkan dalam instalasi listrik beserta fungsinya.",
+  estimasiMenit: 8,
   tujuan: [
     "Menyebutkan alat-alat kerja instalasi listrik beserta fungsinya.",
-    "Menyebutkan bahan/material instalasi listrik beserta fungsinya.",
-    "Memilih alat dan bahan yang tepat dan aman.",
+    "Mengenali bentuk masing-masing alat kerja.",
+    "Memilih alat yang tepat dan aman.",
   ],
   blok: [
     {
       tipe: "subjudul",
-      teks: "A. Alat Kerja (Tools)",
+      teks: "Alat Kerja (Tools)",
     },
     {
-      tipe: "tabel",
-      kolom: ["Alat", "Fungsi"],
-      baris: [
-        ["Obeng (+ dan −) berinsulasi", "Memasang/melepas sekrup terminal & komponen."],
-        ["Tang kombinasi", "Memotong, menjepit, & memilin kabel."],
-        ["Tang potong & tang lancip", "Memotong kabel & menjangkau area sempit."],
-        ["Tang pengupas (stripper)", "Mengupas isolasi kabel dengan rapi."],
-        ["Tespen", "Mendeteksi ada/tidaknya tegangan secara cepat."],
-        ["Multimeter / AVO meter", "Mengukur tegangan, arus, & tahanan."],
-        ["Megger", "Mengukur tahanan isolasi instalasi."],
-        ["Bor listrik & mata bor beton", "Melubangi dinding untuk jalur/fischer."],
-        ["Palu & pahat", "Membobok dinding untuk jalur in-bow."],
-        ["Waterpass & meteran", "Memastikan pemasangan lurus & rata."],
-      ],
-    },
-    {
-      tipe: "subjudul",
-      teks: "B. Bahan / Material",
-    },
-    {
-      tipe: "tabel",
-      kolom: ["Bahan", "Fungsi"],
-      baris: [
-        ["Kabel NYA / NYM / NYY", "Penghantar arus listrik antar titik."],
-        ["Pipa konduit PVC & fleksibel", "Pelindung kabel di dinding."],
-        ["Kotak sambung (T-dus) & inbow-dus", "Tempat sambungan & dudukan komponen."],
-        ["Saklar & stop kontak", "Kontrol dan titik akses listrik."],
-        ["MCB, ELCB, box panel", "Pengaman & distribusi."],
-        ["Fitting & lampu", "Penerangan."],
-        ["Lasdop / wire connector", "Penutup & pengaman sambungan kabel."],
-        ["Isolasi (electrical tape)", "Membungkus & mengisolasi sambungan."],
-        ["Klem kabel & fischer", "Merapikan & memasang kabel/pipa ke dinding."],
-        ["Elektroda pembumian (ground rod)", "Batang tembaga/baja yang ditanam untuk arde."],
+      tipe: "komponen-list",
+      items: [
+        { ikon: "obeng", nama: "Obeng (+ dan −) Berinsulasi", teks: "Memasang/melepas sekrup terminal & komponen.", gambar: "https://digipaysatu.kemenkeu.go.id/hotlink//digipay-assets/produk/2022/765498-obeng-plus-minus.png" },
+        { ikon: "tang-kombinasi", nama: "Tang Kombinasi", teks: "Memotong, menjepit, & memilin kabel.", gambar: "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//catalog-image/91/MTA-151013862/yukido_tang_kombinasi_9-_4in1_crimping_skun_kupas_kabel_potong_plier_yukido_full01_oxmxiwua.jpg" },
+        { ikon: "tang-potong", nama: "Tang Potong & Tang Lancip", teks: "Memotong kabel & menjangkau area sempit.", gambar: "https://image.powerindociptaenergy.id/s3/productimages/webp/co273485/p1458305/w600-h600/fbe8b1ab-47b3-4697-b50a-59f53f9c5f98w.jpg" },
+        { ikon: "stripper", nama: "Tang Pengupas (Stripper)", teks: "Mengupas isolasi kabel dengan rapi.", gambar: "https://storage.googleapis.com/eezee-product-images/force-6912160-insulated-wire-stripper-pliers-6-ir9o_600.png" },
+        { ikon: "tespen", nama: "Tespen", teks: "Mendeteksi ada/tidaknya tegangan secara cepat.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1d2HjySk5xG-wQ0JCm7XB-Vdh0VQZBNj-AA&s" },
+        { ikon: "multimeter", nama: "Multimeter / AVO Meter", teks: "Mengukur tegangan, arus, & tahanan.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxsBUuXQmGnABGw7nxM0dtdFDW0HIvSQB_sQ&s" },
+        { ikon: "megger", nama: "Megger", teks: "Mengukur tahanan isolasi instalasi.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6B3lQ0gM8SGyb7y-kR5cZZiBnOQs3rktgZw&s" },
+        { ikon: "bor", nama: "Bor Listrik & Mata Bor Beton", teks: "Melubangi dinding untuk jalur/fischer.", gambar: "https://www.parto.id/asset/foto_produk/ed67c1bfde0a7ee917287486e42bb843.jpg" },
+        { ikon: "palu", nama: "Palu & Pahat", teks: "Membobok dinding untuk jalur in-bow.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHmJ9nxq8qvd09GN6L3nJYvDrPXuRY47sQFQ&s" },
+        { ikon: "waterpass", nama: "Waterpass & Meteran", teks: "Memastikan pemasangan lurus & rata.", gambar: "https://img.lazcdn.com/g/p/8ba4fed4d102f6cefa39e4c4bd8d7342.jpg_720x720q80.jpg" },
       ],
     },
     {
       tipe: "info",
       varian: "tips",
-      judul: "Pilih yang ber-SNI",
-      teks: "Selalu pilih kabel dan komponen berlabel SNI dan dari merek terpercaya. Kabel abal-abal dengan tembaga tipis mudah panas dan menjadi sumber kebakaran. Hemat di bahan listrik bisa berakibat fatal.",
+      judul: "Pilih alat ber-SNI & berinsulasi",
+      teks: "Gunakan alat kerja berinsulasi (bertanda tegangan, mis. 1000 V) dan berlabel SNI dari merek terpercaya. Alat berinsulasi melindungi dari sengatan saat bekerja, dan alat berkualitas lebih awet serta aman.",
     },
   ],
 };

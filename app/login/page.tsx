@@ -13,7 +13,7 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center px-4 py-10" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%)" }}>
       <div className="w-full max-w-md">
         <Link href="/" className="flex items-center justify-center gap-2 text-white font-extrabold text-2xl mb-6" style={{ fontFamily: "Sora, sans-serif" }}>
-          <span>⚡</span> Elektri<span style={{ color: "#f59e0b" }}>Kamus</span>
+          <span>⚡</span> E-Modul <span style={{ color: "#f59e0b" }}>Instalasi Listrik</span>
         </Link>
 
         <div className="bg-white rounded-3xl shadow-2xl p-7">

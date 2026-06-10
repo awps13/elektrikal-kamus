@@ -44,7 +44,7 @@ export default async function DashboardPage() {
       </main>
 
       <footer className="border-t border-gray-200 py-6 text-center mt-6">
-        <p className="text-xs text-gray-400">⚡ <strong className="text-gray-600">ElektriKamus</strong> — Dashboard</p>
+        <p className="text-xs text-gray-400">⚡ <strong className="text-gray-600">E-Modul</strong> — Dashboard</p>
       </footer>
     </div>
   );

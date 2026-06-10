@@ -16,7 +16,7 @@ async function readSession(req: NextRequest): Promise<Session> {
   }
 }
 
-const PROTECTED = ["/dashboard"];
+const PROTECTED = ["/dashboard", "/modul", "/kamus"];
 const AUTH_PAGES = ["/login"];
 
 export default async function proxy(req: NextRequest) {

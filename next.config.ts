@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
-  trailingSlash: true,
+  // Catatan: "output: export" dihapus karena aplikasi kini membutuhkan server
+  // (autentikasi, database Neon via Prisma, dan Server Actions).
   images: { unoptimized: true },
 };
 

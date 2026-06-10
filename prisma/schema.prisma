@@ -1,0 +1,43 @@
+// Prisma schema — ElektriKamus
+// Database: Neon (PostgreSQL). ORM: Prisma 6.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+enum Role {
+  GURU
+  MURID
+}
+
+model User {
+  id        String       @id @default(cuid())
+  // Nama lengkap. Untuk MURID ini adalah identitas login (unik / primary key).
+  name      String       @unique
+  kelas     String? // untuk MURID
+  // Untuk GURU: login pakai username + password.
+  username  String?      @unique
+  password  String?
+  role      Role         @default(MURID)
+  createdAt DateTime     @default(now())
+  results   QuizResult[]
+}
+
+model QuizResult {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quizTitle  String   @default("Evaluasi Modul Instalasi Listrik")
+  score      Int // jumlah jawaban benar
+  total      Int // total soal
+  percentage Int // nilai 0-100
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
+}

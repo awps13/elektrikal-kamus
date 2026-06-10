@@ -1037,6 +1037,7 @@ type View = "cover" | { babIndex: number } | "evaluasi";
 export default function ModulClient({ user }: { user: AuthUser }) {
   const [view, setView] = useState<View>("cover");
   const [dibaca, setDibaca] = useState<Set<string>>(new Set());
+  const [menuProfil, setMenuProfil] = useState(false);
 
   const babIndex = typeof view === "object" ? view.babIndex : -1;
   const babAktif: Bab | null = babIndex >= 0 ? babList[babIndex] : null;
@@ -1098,37 +1099,93 @@ export default function ModulClient({ user }: { user: AuthUser }) {
                 {progress}%
               </span>
             </div>
-            {user ? (
-              <>
+            {/* DESKTOP — tombol penuh */}
+            <div className="hidden sm:flex items-center gap-3">
+              {user ? (
+                <>
+                  <Link
+                    href="/dashboard"
+                    className="text-xs font-semibold text-white bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg px-3 py-1.5 transition-colors"
+                  >
+                    📊 Dashboard
+                  </Link>
+                  <form action={logout}>
+                    <button className="text-xs font-semibold text-rose-200 hover:text-white border border-rose-300/30 rounded-lg px-3 py-1.5 transition-colors">
+                      Keluar
+                    </button>
+                  </form>
+                </>
+              ) : (
                 <Link
-                  href="/dashboard"
-                  className="text-xs font-semibold text-white bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg px-3 py-1.5 transition-colors"
+                  href="/login"
+                  className="text-xs font-semibold text-gray-900 rounded-lg px-3 py-1.5 transition-all hover:scale-105"
+                  style={{
+                    background: "linear-gradient(135deg,#f59e0b,#d97706)",
+                  }}
                 >
-                  📊 Dashboard
+                  Masuk
                 </Link>
-                <form action={logout}>
-                  <button className="text-xs font-semibold text-rose-200 hover:text-white border border-rose-300/30 rounded-lg px-3 py-1.5 transition-colors">
-                    Keluar
+              )}
+            </div>
+
+            {/* MOBILE — ikon profil + dropdown */}
+            <div className="sm:hidden relative">
+              {user ? (
+                <>
+                  <button
+                    onClick={() => setMenuProfil((v) => !v)}
+                    aria-label="Menu profil"
+                    aria-expanded={menuProfil}
+                    className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm text-gray-900 transition-transform hover:scale-105"
+                    style={{ background: "linear-gradient(135deg,#f59e0b,#d97706)" }}
+                  >
+                    {user.name.charAt(0).toUpperCase()}
                   </button>
-                </form>
-              </>
-            ) : (
-              <Link
-                href="/login"
-                className="text-xs font-semibold text-gray-900 rounded-lg px-3 py-1.5 transition-all hover:scale-105"
-                style={{
-                  background: "linear-gradient(135deg,#f59e0b,#d97706)",
-                }}
-              >
-                Masuk
-              </Link>
-            )}
-            <Link
-              href="/"
-              className="text-xs font-semibold text-blue-200 hover:text-white border border-white/20 rounded-lg px-3 py-1.5 transition-colors"
-            >
-              ← E-Modul
-            </Link>
+                  {menuProfil && (
+                    <>
+                      <button
+                        aria-hidden
+                        tabIndex={-1}
+                        onClick={() => setMenuProfil(false)}
+                        className="fixed inset-0 z-40 cursor-default"
+                      />
+                      <div className="absolute right-0 mt-2 w-52 z-50 rounded-xl overflow-hidden bg-white shadow-xl border border-gray-200">
+                        <div className="px-4 py-3 border-b border-gray-100">
+                          <div className="text-sm font-bold text-gray-900 truncate">
+                            {user.name}
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            {user.role === "GURU" ? "Guru" : "Murid"}
+                          </div>
+                        </div>
+                        <Link
+                          href="/dashboard"
+                          onClick={() => setMenuProfil(false)}
+                          className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                        >
+                          📊 Dashboard
+                        </Link>
+                        <form action={logout}>
+                          <button className="w-full flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-rose-600 hover:bg-rose-50 transition-colors text-left">
+                            🚪 Keluar
+                          </button>
+                        </form>
+                      </div>
+                    </>
+                  )}
+                </>
+              ) : (
+                <Link
+                  href="/login"
+                  className="text-xs font-semibold text-gray-900 rounded-lg px-3 py-1.5 transition-all hover:scale-105 inline-block"
+                  style={{
+                    background: "linear-gradient(135deg,#f59e0b,#d97706)",
+                  }}
+                >
+                  Masuk
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       </header>
@@ -1144,7 +1201,7 @@ export default function ModulClient({ user }: { user: AuthUser }) {
               onClick={bukaCover}
               className={`w-full text-left px-3 py-2 rounded-xl text-sm font-medium transition-colors flex items-center gap-2 ${view === "cover" ? "bg-gray-900 text-white" : "text-gray-600 hover:bg-gray-100"}`}
             >
-              <span>🏠</span> Pendahuluan
+              <span>🏠</span> Home
             </button>
             {babList.map((b, i) => {
               const aktif = babIndex === i;

@@ -139,7 +139,7 @@ async function MuridView({ userId, name }: { userId: string; name: string }) {
           <h1 className="text-2xl font-extrabold text-gray-900" style={{ fontFamily: "Sora, sans-serif" }}>Halo, {name} 👋</h1>
           <p className="text-sm text-gray-500">Riwayat nilai kuis yang sudah kamu kirim ke guru.</p>
         </div>
-        <Link href="/modul" className="px-5 py-2.5 rounded-xl text-sm font-bold text-white transition-all hover:scale-105" style={{ background: "linear-gradient(135deg,#f59e0b,#d97706)" }}>
+        <Link href="/modul?kuis=1" className="px-5 py-2.5 rounded-xl text-sm font-bold text-white transition-all hover:scale-105" style={{ background: "linear-gradient(135deg,#f59e0b,#d97706)" }}>
           📘 Kerjakan Kuis
         </Link>
       </div>
@@ -159,7 +159,7 @@ async function MuridView({ userId, name }: { userId: string; name: string }) {
             <div className="text-5xl mb-3">🧠</div>
             <p className="text-gray-600 font-semibold">Belum ada nilai</p>
             <p className="text-sm text-gray-400 mb-4">Kerjakan kuis evaluasi modul untuk mengirim nilai ke guru.</p>
-            <Link href="/modul" className="inline-block px-5 py-2.5 rounded-xl text-sm font-bold text-white" style={{ background: "linear-gradient(135deg,#7c3aed,#4f46e5)" }}>Mulai Kuis →</Link>
+            <Link href="/modul?kuis=1" className="inline-block px-5 py-2.5 rounded-xl text-sm font-bold text-white" style={{ background: "linear-gradient(135deg,#7c3aed,#4f46e5)" }}>Mulai Kuis →</Link>
           </div>
         ) : (
           <div className="overflow-x-auto">

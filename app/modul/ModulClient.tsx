@@ -1034,8 +1034,14 @@ function Evaluasi({ user }: { user: AuthUser }) {
 // ════════════════════════════════════════════════════════════════════════════
 type View = "cover" | { babIndex: number } | "evaluasi";
 
-export default function ModulClient({ user }: { user: AuthUser }) {
-  const [view, setView] = useState<View>("cover");
+export default function ModulClient({
+  user,
+  initialView = "cover",
+}: {
+  user: AuthUser;
+  initialView?: View;
+}) {
+  const [view, setView] = useState<View>(initialView);
   const [dibaca, setDibaca] = useState<Set<string>>(new Set());
   const [menuProfil, setMenuProfil] = useState(false);
 
@@ -1306,7 +1312,7 @@ export default function ModulClient({ user }: { user: AuthUser }) {
                       <span className="text-3xl">{b.ikon}</span>
                       <div className="flex-1">
                         <div className="text-xs font-bold uppercase tracking-wider text-amber-600 mb-1">
-                          Bab {b.no} · {b.estimasiMenit} menit
+                          Bab {b.no}
                         </div>
                         <h3
                           className="font-bold text-gray-900 leading-snug mb-1"
@@ -1341,8 +1347,6 @@ export default function ModulClient({ user }: { user: AuthUser }) {
               <div className="bg-white rounded-3xl border border-gray-200 p-6 md:p-8 shadow-sm">
                 <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-600 mb-2">
                   <span>Bab {babAktif.no}</span>
-                  <span className="text-gray-300">·</span>
-                  <span>⏱ {babAktif.estimasiMenit} menit</span>
                 </div>
                 <h1
                   className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-3 leading-tight flex items-center gap-3"

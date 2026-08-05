@@ -30,7 +30,7 @@ export interface Bab {
 }
 
 // ── BAB 1 — PENGERTIAN INSTALASI LISTRIK ─────────────────────────────────────
-const bab1: Bab = {
+const babPengertian: Bab = {
   id: "pengertian",
   no: 1,
   judul: "Pengertian Instalasi Listrik",
@@ -106,10 +106,10 @@ const bab1: Bab = {
   ],
 };
 
-// ── BAB 2 — KESELAMATAN DAN KESEHATAN KERJA (K3) ─────────────────────────────
-const bab2: Bab = {
+// ── BAB 6 — KESELAMATAN DAN KESEHATAN KERJA (K3) ─────────────────────────────
+const babK3: Bab = {
   id: "k3",
-  no: 2,
+  no: 6,
   judul: "Keselamatan & Kesehatan Kerja (K3)",
   ikon: "🦺",
   ringkasan: "Prinsip K3 listrik, bahaya listrik, APD, prosedur kerja aman, dan pertolongan pertama.",
@@ -215,10 +215,10 @@ const bab2: Bab = {
   ],
 };
 
-// ── BAB 3 — KOMPONEN INSTALASI LISTRIK ───────────────────────────────────────
-const bab3: Bab = {
+// ── BAB 2 — KOMPONEN INSTALASI LISTRIK ───────────────────────────────────────
+const babKomponen: Bab = {
   id: "komponen",
-  no: 3,
+  no: 2,
   judul: "Komponen Instalasi Listrik",
   ikon: "⚡",
   ringkasan: "Mengenal komponen utama: kWh meter, PHB, MCB, ELCB, saklar, stop kontak, fitting, dan pembumian.",
@@ -256,7 +256,7 @@ const bab3: Bab = {
       items: [
         { ikon: "saklar", nama: "Saklar (Switch)", teks: "Memutus/menyambung aliran ke lampu. Jenis: tunggal, seri (ganda), tukar (hotel), silang.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRorS5p5Jc7aHYKhy1tZDIHmsTUcFk6afGzjA&s" },
         { ikon: "stopkontak", nama: "Stop Kontak (Outlet)", teks: "Titik sambungan untuk peralatan; gunakan tipe 3 lubang (berarde) untuk keamanan.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhiK03i3v6xlFn1uEMM1kE0ljO2cJVYP2KTw&s" },
-        { ikon: "steker", nama: "Steker (Plug)", teks: "Colokan pada ujung kabel peralatan yang dimasukkan ke stop kontak.", gambar: "http://image.indonetwork.co.id/products/thumbs/500x500/2025/07/16/d8536d4d-35ce-49a8-a2ec-0a007670551f.jpg" },
+        { ikon: "steker", nama: "Steker (Plug)", teks: "Colokan pada ujung kabel peralatan yang dimasukkan ke stop kontak.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVgizs3n_AxvgqUjcKA49-DzVuVgYlp40Gm9fbEG7mJQ&s=10" },
         { ikon: "kotaksambung", nama: "Kotak Sambung (T-dus)", teks: "Tempat penyambungan kabel agar rapi dan aman.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ-vkaYfoaq2QzTYVjwFWUaksETFuT6SPNFw&s" },
       ],
     },
@@ -297,7 +297,7 @@ const bab3: Bab = {
 };
 
 // ── BAB 4 — SIMBOL DAN GAMBAR INSTALASI LISTRIK RUMAH ─────────────────────────
-const bab4: Bab = {
+const babSimbol: Bab = {
   id: "simbol",
   no: 4,
   judul: "Simbol & Gambar Instalasi Listrik Rumah",
@@ -353,7 +353,7 @@ const bab4: Bab = {
 };
 
 // ── BAB 5 — TEKNIK PEMASANGAN INSTALASI LISTRIK ──────────────────────────────
-const bab5: Bab = {
+const babTeknik: Bab = {
   id: "teknik",
   no: 5,
   judul: "Teknik Pemasangan Instalasi Listrik",
@@ -450,10 +450,10 @@ const bab5: Bab = {
   ],
 };
 
-// ── BAB 6 — ALAT INSTALASI LISTRIK ───────────────────────────────────────────
-const bab6: Bab = {
+// ── BAB 3 — ALAT INSTALASI LISTRIK ───────────────────────────────────────────
+const babAlat: Bab = {
   id: "alat-bahan",
-  no: 6,
+  no: 3,
   judul: "Alat Instalasi Listrik",
   ikon: "🔧",
   ringkasan: "Daftar peralatan kerja (tools) yang dibutuhkan dalam instalasi listrik beserta fungsinya.",
@@ -492,7 +492,8 @@ const bab6: Bab = {
   ],
 };
 
-export const babList: Bab[] = [bab1, bab2, bab3, bab4, bab5, bab6];
+// Urutan tampil: pengertian → komponen → alat → simbol → teknik pemasangan → K3
+export const babList: Bab[] = [babPengertian, babKomponen, babAlat, babSimbol, babTeknik, babK3];
 
 // ── EVALUASI — 15 SOAL PILIHAN GANDA ─────────────────────────────────────────
 export interface SoalModul {
@@ -540,7 +541,7 @@ export const soalEvaluasi: SoalModul[] = [
     pilihan: ["Sekitar 50 mA (0,05 A)", "Minimal 100 A", "Tepat 220 V", "Di atas 1000 watt"],
     jawabanBenar: 0,
     penjelasan: "Arus sekitar 50 mA (0,05 ampere) saja yang melewati tubuh sudah dapat menyebabkan kematian. Karena itu pengaman ELCB/RCCB yang peka 30 mA sangat dianjurkan.",
-    bab: 2,
+    bab: 6,
   },
   {
     id: 5,
@@ -553,7 +554,7 @@ export const soalEvaluasi: SoalModul[] = [
     ],
     jawabanBenar: 2,
     penjelasan: "Matikan sumber listrik lebih dulu. Jangan menyentuh korban yang masih terhubung arus karena Anda bisa ikut tersengat. Setelah aman, beri pertolongan dan hubungi 119.",
-    bab: 2,
+    bab: 6,
   },
   {
     id: 6,
@@ -566,7 +567,7 @@ export const soalEvaluasi: SoalModul[] = [
     ],
     jawabanBenar: 0,
     penjelasan: "LOTO (Lockout–Tagout) adalah prosedur mengunci (lockout) dan menandai (tagout) sumber energi listrik agar tidak dinyalakan secara tidak sengaja saat teknisi sedang bekerja.",
-    bab: 2,
+    bab: 6,
   },
   {
     id: 7,
@@ -574,7 +575,7 @@ export const soalEvaluasi: SoalModul[] = [
     pilihan: ["Topi biasa", "Sepatu safety berinsulasi", "Kaus tangan kain", "Kacamata hitam"],
     jawabanBenar: 1,
     penjelasan: "Sepatu safety berinsulasi mencegah tubuh menjadi jalur arus ke tanah (grounding tubuh), sehingga melindungi pekerja dari sengatan listrik.",
-    bab: 2,
+    bab: 6,
   },
   {
     id: 8,
@@ -582,7 +583,7 @@ export const soalEvaluasi: SoalModul[] = [
     pilihan: ["kWh meter", "Stop kontak", "MCB", "Fitting lampu"],
     jawabanBenar: 2,
     penjelasan: "MCB (Miniature Circuit Breaker) memutus aliran listrik otomatis saat terjadi overload atau hubung singkat, mencegah kebakaran dan kerusakan.",
-    bab: 3,
+    bab: 2,
   },
   {
     id: 9,
@@ -590,7 +591,7 @@ export const soalEvaluasi: SoalModul[] = [
     pilihan: ["ELCB / RCCB", "Sekring 10 A", "Saklar tukar", "kWh meter"],
     jawabanBenar: 0,
     penjelasan: "ELCB/RCCB mendeteksi arus bocor sekecil 30 mA dan langsung memutus daya, jauh lebih peka dari MCB biasa sehingga dapat melindungi nyawa manusia.",
-    bab: 3,
+    bab: 2,
   },
   {
     id: 10,
@@ -598,7 +599,7 @@ export const soalEvaluasi: SoalModul[] = [
     pilihan: ["2 × 1,5 mm²", "3 × 2,5 mm²", "1 × 0,5 mm²", "4 × 10 mm²"],
     jawabanBenar: 1,
     penjelasan: "NYM 3 × 2,5 mm² (3 inti: fasa, netral, arde) adalah ukuran standar untuk stop kontak, mampu menangani beban hingga ± 16 A.",
-    bab: 3,
+    bab: 2,
   },
   {
     id: 11,
@@ -643,6 +644,6 @@ export const soalEvaluasi: SoalModul[] = [
     pilihan: ["Tespen", "Megger", "Palu", "Waterpass"],
     jawabanBenar: 1,
     penjelasan: "Megger (insulation tester) mengukur tahanan isolasi instalasi. Sesuai PUIL, nilainya harus minimal 1 MΩ; di bawah itu menandakan kebocoran isolasi yang berbahaya.",
-    bab: 6,
+    bab: 3,
   },
 ];

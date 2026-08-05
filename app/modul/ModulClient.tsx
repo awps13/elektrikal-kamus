@@ -1271,8 +1271,8 @@ export default function ModulClient({
                   Instalasi Listrik Rumah
                 </h1>
                 <p className="text-blue-200 max-w-xl mx-auto leading-relaxed">
-                  Modul lengkap dari pengertian, K3, komponen, simbol & gambar,
-                  teknik pemasangan, hingga alat & bahan — dilengkapi evaluasi
+                  Modul lengkap dari pengertian, komponen, alat, simbol &
+                  gambar, teknik pemasangan, hingga K3 — dilengkapi evaluasi
                   15 soal.
                 </p>
               </div>

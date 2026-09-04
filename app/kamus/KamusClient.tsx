@@ -4,6 +4,11 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import { items, soalKuis, kategoriInfo, type Kategori, type Item } from "../data/konten";
 import { logout } from "../actions/auth";
+import TurPandu, {
+  TombolPanduan,
+  useTur,
+  type LangkahTur,
+} from "../components/TurPandu";
 
 function highlight(text: string, query: string) {
   if (!query.trim()) return text;
@@ -204,6 +209,62 @@ export default function KamusClient({ user }: { user: AuthUser }) {
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<Item | null>(null);
 
+  // ── TUR PANDU (khusus murid) ──────────────────────────────────────────────
+  const murid = user?.role === "MURID";
+  const tur = useTur("tur-kamus-v1", !!murid);
+
+  // Kembalikan halaman ke keadaan bersih sebelum menyorot daftar istilah.
+  function resetTampilan() {
+    setTab("semua");
+    setSearch("");
+    setSelected(null);
+  }
+
+  const langkahTur: LangkahTur[] = [
+    {
+      target: '[data-tur="ke-modul"]',
+      judul: "Materi lengkap ada di Modul",
+      teks: "Halaman ini adalah kamus istilah. Untuk belajar berurutan bab per bab sampai evaluasi, masuk lewat tombol ini.",
+      emoji: "📘",
+      sebelumTampil: resetTampilan,
+    },
+    {
+      target: '[data-tur="cari"]',
+      judul: "Cari istilah dengan cepat",
+      teks: "Ketik nama komponen, alat, atau istilah yang sedang kamu pelajari — misalnya \"MCB\" atau \"arde\". Kata yang cocok akan disorot kuning.",
+      emoji: "🔍",
+      sebelumTampil: resetTampilan,
+    },
+    {
+      target: '[data-tur="kategori"]',
+      judul: "Saring per kategori",
+      teks: "Pilih kategori untuk mempersempit daftar: Komponen, Alat & Bahan, Teknik pemasangan, atau K3 (keselamatan kerja).",
+      emoji: "🏷️",
+      sebelumTampil: resetTampilan,
+    },
+    {
+      target: '[data-tur="daftar"]',
+      judul: "Klik kartu untuk detail",
+      teks: "Setiap kartu bisa diklik untuk membuka pop-up berisi deskripsi, fungsi, dan tips praktis dari istilah tersebut.",
+      emoji: "🗂️",
+      opsional: true,
+      sebelumTampil: resetTampilan,
+    },
+    {
+      target: '[data-tur="kuis"]',
+      judul: "Uji pemahamanmu",
+      teks: "Tab Kuis berisi latihan singkat semua kategori. Ini latihan bebas — nilai yang dikirim ke guru hanya dari Evaluasi di halaman Modul.",
+      emoji: "🧠",
+      sebelumTampil: () => setTab("kuis"),
+    },
+  ];
+
+  function tutupTur() {
+    tur.tutup();
+    resetTampilan();
+    if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   const filtered = useMemo(() => {
     const q = search.toLowerCase();
     return items.filter((item) => {
@@ -234,6 +295,7 @@ export default function KamusClient({ user }: { user: AuthUser }) {
           {user ? (
             <>
               <span className="hidden sm:inline text-xs text-blue-200">Halo, <strong className="text-white">{user.name}</strong> · {user.role === "GURU" ? "Guru" : "Murid"}</span>
+              {murid && <TombolPanduan onClick={tur.mulai} />}
               <Link href="/dashboard" className="text-xs font-semibold text-white bg-white/10 border border-white/20 rounded-lg px-3 py-1.5 hover:bg-white/20 transition-colors">
                 {user.role === "GURU" ? "📊 Dashboard Guru" : "📊 Dashboard"}
               </Link>
@@ -257,7 +319,7 @@ export default function KamusClient({ user }: { user: AuthUser }) {
             Panduan lengkap &amp; visual untuk memahami instalasi listrik rumah — dari komponen, teknik, hingga keselamatan kerja.
           </p>
           <div className="flex items-center justify-center gap-3 flex-wrap mb-8">
-            <Link href="/modul" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white transition-all hover:scale-105 shadow-lg" style={{ background: "linear-gradient(135deg,#f59e0b,#d97706)" }}>
+            <Link href="/modul" data-tur="ke-modul" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white transition-all hover:scale-105 shadow-lg" style={{ background: "linear-gradient(135deg,#f59e0b,#d97706)" }}>
               📘 Buka Modul Pembelajaran
             </Link>
             <a href="#kamus" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-blue-100 border border-white/20 hover:bg-white/10 transition-colors">
@@ -283,7 +345,7 @@ export default function KamusClient({ user }: { user: AuthUser }) {
 
       {/* SEARCH + TABS */}
       <div id="kamus" className="max-w-4xl mx-auto px-4 -mt-6 relative z-10 scroll-mt-4">
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-200 flex items-center gap-3 px-4 py-3 mb-4">
+        <div data-tur="cari" className="bg-white rounded-2xl shadow-lg border border-gray-200 flex items-center gap-3 px-4 py-3 mb-4">
           <span className="text-xl">🔍</span>
           <input
             type="text" value={search} onChange={(e) => setSearch(e.target.value)}
@@ -292,7 +354,7 @@ export default function KamusClient({ user }: { user: AuthUser }) {
           />
           {search && <button onClick={() => setSearch("")} className="text-gray-400 hover:text-gray-600 text-lg leading-none">×</button>}
         </div>
-        <div className="flex gap-2 flex-wrap mb-6">
+        <div data-tur="kategori" className="flex gap-2 flex-wrap mb-6">
           {tabs.map((t) => (
             <button key={t.key} onClick={() => setTab(t.key)}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold transition-all ${tab === t.key ? "text-white shadow-md scale-105" : "bg-white text-gray-600 border border-gray-200 hover:border-gray-300 hover:bg-gray-50"}`}
@@ -311,7 +373,7 @@ export default function KamusClient({ user }: { user: AuthUser }) {
       {/* CONTENT */}
       <div className="max-w-4xl mx-auto px-4 pb-16">
         {tab === "kuis" ? (
-          <div className="bg-white rounded-3xl border border-gray-200 shadow-sm p-6 md:p-8 max-w-2xl mx-auto animate-in">
+          <div data-tur="kuis" className="bg-white rounded-3xl border border-gray-200 shadow-sm p-6 md:p-8 max-w-2xl mx-auto animate-in">
             <div className="flex items-center gap-3 mb-6 pb-5 border-b border-gray-100">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl" style={{ background: "linear-gradient(135deg,#7c3aed,#4f46e5)" }}>🧠</div>
               <div>
@@ -340,7 +402,7 @@ export default function KamusClient({ user }: { user: AuthUser }) {
                 <p className="text-sm text-gray-400">Coba kata kunci yang berbeda</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 animate-in">
+              <div data-tur="daftar" className="grid grid-cols-1 sm:grid-cols-2 gap-4 animate-in">
                 {filtered.map((item) => (
                   <KamusCard key={item.id} item={item} search={search} onClick={() => setSelected(item)} />
                 ))}
@@ -356,6 +418,15 @@ export default function KamusClient({ user }: { user: AuthUser }) {
       </footer>
 
       {selected && <DetailModal item={selected} onClose={() => setSelected(null)} />}
+
+      {murid && (
+        <TurPandu
+          langkah={langkahTur}
+          open={tur.open}
+          onTutup={tutupTur}
+          label="Panduan Kamus"
+        />
+      )}
     </div>
   );
 }

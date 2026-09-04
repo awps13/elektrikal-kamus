@@ -10,12 +10,20 @@ export type Blok =
   | { tipe: "subjudul"; teks: string }
   | { tipe: "poin"; judul?: string; items: string[] }
   | { tipe: "langkah"; items: string[] }
-  | { tipe: "info"; varian: "info" | "bahaya" | "tips" | "catatan"; judul: string; teks: string }
+  | {
+      tipe: "info";
+      varian: "info" | "bahaya" | "tips" | "catatan";
+      judul: string;
+      teks: string;
+    }
   | { tipe: "tabel"; kolom: string[]; baris: string[][] }
   | { tipe: "simbol" } // memicu galeri simbol kelistrikan (dirender di komponen)
   | { tipe: "diagram" } // memicu diagram pengawatan rumah (dirender di komponen)
   | { tipe: "apd" } // memicu galeri ilustrasi Alat Pelindung Diri (dirender di komponen)
-  | { tipe: "komponen-list"; items: { ikon: string; nama: string; teks: string; gambar?: string }[] } // kartu komponen + foto (gambar: URL/path opsional)
+  | {
+      tipe: "komponen-list";
+      items: { ikon: string; nama: string; teks: string; gambar?: string }[];
+    } // kartu komponen + foto (gambar: URL/path opsional)
   | { tipe: "video"; youtube: string; judul?: string }; // video YouTube tertanam (youtube: ID video)
 
 export interface Bab {
@@ -35,7 +43,8 @@ const babPengertian: Bab = {
   no: 1,
   judul: "Pengertian Instalasi Listrik",
   ikon: "💡",
-  ringkasan: "Memahami definisi, tujuan, jenis, dan dasar hukum instalasi listrik rumah.",
+  ringkasan:
+    "Memahami definisi, tujuan, jenis, dan dasar hukum instalasi listrik rumah.",
   estimasiMenit: 10,
   tujuan: [
     "Menjelaskan pengertian instalasi listrik dengan benar.",
@@ -75,12 +84,36 @@ const babPengertian: Bab = {
       tipe: "tabel",
       kolom: ["Dasar Penggolongan", "Jenis", "Keterangan"],
       baris: [
-        ["Fungsi", "Instalasi penerangan", "Menyalurkan listrik ke lampu/titik cahaya."],
-        ["Fungsi", "Instalasi tenaga/daya", "Menyalurkan listrik ke stop kontak & motor listrik."],
-        ["Pemasangan", "Instalasi in-bow (tanam)", "Kabel ditanam di dalam dinding, rapi & tersembunyi."],
-        ["Pemasangan", "Instalasi out-bow (luar)", "Kabel dipasang di permukaan dinding memakai pipa/duct."],
-        ["Tegangan", "Tegangan rendah (TR)", "≤ 1000 V, mencakup instalasi rumah (220/380 V)."],
-        ["Tegangan", "Tegangan menengah/tinggi", "Untuk jaringan distribusi & industri."],
+        [
+          "Fungsi",
+          "Instalasi penerangan",
+          "Menyalurkan listrik ke lampu/titik cahaya.",
+        ],
+        [
+          "Fungsi",
+          "Instalasi tenaga/daya",
+          "Menyalurkan listrik ke stop kontak & motor listrik.",
+        ],
+        [
+          "Pemasangan",
+          "Instalasi in-bow (tanam)",
+          "Kabel ditanam di dalam dinding, rapi & tersembunyi.",
+        ],
+        [
+          "Pemasangan",
+          "Instalasi out-bow (luar)",
+          "Kabel dipasang di permukaan dinding memakai pipa/duct.",
+        ],
+        [
+          "Tegangan",
+          "Tegangan rendah (TR)",
+          "≤ 1000 V, mencakup instalasi rumah (220/380 V).",
+        ],
+        [
+          "Tegangan",
+          "Tegangan menengah/tinggi",
+          "Untuk jaringan distribusi & industri.",
+        ],
       ],
     },
     {
@@ -112,7 +145,8 @@ const babK3: Bab = {
   no: 6,
   judul: "Keselamatan & Kesehatan Kerja (K3)",
   ikon: "🦺",
-  ringkasan: "Prinsip K3 listrik, bahaya listrik, APD, prosedur kerja aman, dan pertolongan pertama.",
+  ringkasan:
+    "Prinsip K3 listrik, bahaya listrik, APD, prosedur kerja aman, dan pertolongan pertama.",
   estimasiMenit: 14,
   tujuan: [
     "Menjelaskan pengertian dan tujuan K3 listrik.",
@@ -166,11 +200,23 @@ const babK3: Bab = {
       tipe: "tabel",
       kolom: ["APD", "Fungsi"],
       baris: [
-        ["Sarung tangan isolasi (min. 1000 V)", "Melindungi tangan dari sengatan listrik."],
-        ["Sepatu safety berinsulasi", "Mencegah arus mengalir ke tanah melalui tubuh."],
-        ["Helm pelindung", "Melindungi kepala dari benturan & kejatuhan benda."],
+        [
+          "Sarung tangan isolasi (min. 1000 V)",
+          "Melindungi tangan dari sengatan listrik.",
+        ],
+        [
+          "Sepatu safety berinsulasi",
+          "Mencegah arus mengalir ke tanah melalui tubuh.",
+        ],
+        [
+          "Helm pelindung",
+          "Melindungi kepala dari benturan & kejatuhan benda.",
+        ],
         ["Kacamata pelindung", "Melindungi mata dari percikan api & serpihan."],
-        ["Pakaian kerja lengan panjang", "Melindungi kulit dari panas & percikan."],
+        [
+          "Pakaian kerja lengan panjang",
+          "Melindungi kulit dari panas & percikan.",
+        ],
       ],
     },
     {
@@ -221,7 +267,8 @@ const babKomponen: Bab = {
   no: 2,
   judul: "Komponen Instalasi Listrik",
   ikon: "⚡",
-  ringkasan: "Mengenal komponen utama: kWh meter, PHB, MCB, ELCB, saklar, stop kontak, fitting, dan pembumian.",
+  ringkasan:
+    "Mengenal komponen utama: kWh meter, PHB, MCB, ELCB, saklar, stop kontak, fitting, dan pembumian.",
   estimasiMenit: 14,
   tujuan: [
     "Menyebutkan komponen utama instalasi listrik rumah.",
@@ -240,12 +287,42 @@ const babKomponen: Bab = {
     {
       tipe: "komponen-list",
       items: [
-        { ikon: "kwh", nama: "kWh Meter", teks: "Alat ukur milik PLN yang mencatat pemakaian energi (kilowatt-hour) untuk penagihan.", gambar: "https://www.panggung.com/pecwp/wp-content/uploads/2016/06/kwh-meter-2.jpg" },
-        { ikon: "phb", nama: "PHB / Box Panel", teks: "Kotak tempat MCB & pengaman — pusat distribusi listrik rumah (Perlengkapan Hubung Bagi).", gambar: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGSedmNm-wH3wmP4mcisMUb4chTWxep5HoHCPHgFzeX7PhojcJHLEfaNesputcJWM415Rm1PU3Zroz2mM293ZvC49r-NE8R0mYrYMuvKB1i_oMbK9eC9E6VMu3mJROFdFkwfz_Z3w3fKs/s1600/panel+hubung+bagi.jpg" },
-        { ikon: "mcb", nama: "MCB", teks: "Miniature Circuit Breaker — memutus arus otomatis saat overload/korsleting.", gambar: "https://www.sinarlistrik.com/wp-content/uploads/2019/08/MCB-2.png" },
-        { ikon: "elcb", nama: "ELCB / RCCB", teks: "Mendeteksi kebocoran arus sekecil 30 mA dan memutus daya untuk melindungi nyawa.", gambar: "https://down-id.img.susercontent.com/file/id-11134207-7r992-lrq8neaj9veu47" },
-        { ikon: "sekring", nama: "Sekring (Fuse)", teks: "Pengaman lebur model lama; putus saat arus berlebih (kini banyak digantikan MCB).", gambar: "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-4700618/best-seller_best-seller-sekring-fuse-colok-besar-10-a-_full01.jpg" },
-      ],
+  {
+    ikon: "kwh",
+    nama: "kWh Meter",
+    teks: "Alat ukur resmi milik PLN yang mencatat jumlah pemakaian energi listrik dalam satuan kilowatt-hour untuk keperluan penagihan bulanan. Terpasang di titik awal instalasi rumah sebelum PHB, sehingga seluruh daya yang masuk ke rumah tercatat melalui alat ini. Ada dua jenis yang umum digunakan, yaitu kWh meter analog dengan piringan berputar dan kWh meter digital atau prabayar (token).",
+    gambar:
+      "https://www.panggung.com/pecwp/wp-content/uploads/2016/06/kwh-meter-2.jpg",
+  },
+  {
+    ikon: "phb",
+    nama: "PHB / Box Panel",
+    teks: "Perlengkapan Hubung Bagi (PHB) adalah kotak yang menjadi pusat distribusi listrik rumah, tempat MCB dan komponen pengaman lain dipasang. Dari kotak ini, arus listrik dibagi ke berbagai jalur sirkuit seperti penerangan, stop kontak, dan peralatan berdaya besar. Penempatannya biasanya di area yang mudah diakses agar memudahkan pemeriksaan atau saat perlu mematikan aliran listrik darurat.",
+    gambar:
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGSedmNm-wH3wmP4mcisMUb4chTWxep5HoHCPHgFzeX7PhojcJHLEfaNesputcJWM415Rm1PU3Zroz2mM293ZvC49r-NE8R0mYrYMuvKB1i_oMbK9eC9E6VMu3mJROFdFkwfz_Z3w3fKs/s1600/panel+hubung+bagi.jpg",
+  },
+  {
+    ikon: "mcb",
+    nama: "MCB",
+    teks: "Miniature Circuit Breaker (MCB) berfungsi memutus aliran arus listrik secara otomatis ketika terjadi beban lebih (overload) atau korsleting. Alat ini bekerja berdasarkan prinsip bimetal dan elektromagnetik yang akan trip saat arus melebihi kapasitas yang ditentukan. Selain sebagai pengaman, MCB juga berguna sebagai saklar utama untuk memutus atau menyambung aliran listrik pada satu jalur sirkuit tertentu.",
+    gambar:
+      "https://www.sinarlistrik.com/wp-content/uploads/2019/08/MCB-2.png",
+  },
+  {
+    ikon: "elcb",
+    nama: "ELCB / RCCB",
+    teks: "Alat pengaman yang mampu mendeteksi kebocoran arus sekecil 30 mA, misalnya akibat isolasi kabel rusak atau kontak dengan bodi peralatan listrik. Begitu terdeteksi ketidakseimbangan arus antara kabel fasa dan netral, alat ini akan langsung memutus daya dalam hitungan milidetik. Fungsinya sangat penting untuk melindungi nyawa manusia dari bahaya sengatan listrik, bukan hanya melindungi peralatan seperti MCB.",
+    gambar:
+      "https://down-id.img.susercontent.com/file/id-11134207-7r992-lrq8neaj9veu47",
+  },
+  {
+    ikon: "sekring",
+    nama: "Sekring (Fuse)",
+    teks: "Pengaman lebur model lama yang bekerja dengan cara memutus rangkaian ketika kawat di dalamnya meleleh akibat arus berlebih. Setelah putus, sekring harus diganti dengan yang baru karena tidak bisa digunakan kembali seperti MCB yang tinggal di-reset. Meski kini banyak digantikan oleh MCB yang lebih praktis, sekring masih dapat ditemukan pada instalasi lama atau peralatan tertentu.",
+    gambar:
+      "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-4700618/best-seller_best-seller-sekring-fuse-colok-besar-10-a-_full01.jpg",
+  },
+],
     },
     {
       tipe: "subjudul",
@@ -254,10 +331,34 @@ const babKomponen: Bab = {
     {
       tipe: "komponen-list",
       items: [
-        { ikon: "saklar", nama: "Saklar (Switch)", teks: "Memutus/menyambung aliran ke lampu. Jenis: tunggal, seri (ganda), tukar (hotel), silang.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRorS5p5Jc7aHYKhy1tZDIHmsTUcFk6afGzjA&s" },
-        { ikon: "stopkontak", nama: "Stop Kontak (Outlet)", teks: "Titik sambungan untuk peralatan; gunakan tipe 3 lubang (berarde) untuk keamanan.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhiK03i3v6xlFn1uEMM1kE0ljO2cJVYP2KTw&s" },
-        { ikon: "steker", nama: "Steker (Plug)", teks: "Colokan pada ujung kabel peralatan yang dimasukkan ke stop kontak.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVgizs3n_AxvgqUjcKA49-DzVuVgYlp40Gm9fbEG7mJQ&s=10" },
-        { ikon: "kotaksambung", nama: "Kotak Sambung (T-dus)", teks: "Tempat penyambungan kabel agar rapi dan aman.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ-vkaYfoaq2QzTYVjwFWUaksETFuT6SPNFw&s" },
+        {
+          ikon: "saklar",
+          nama: "Saklar (Switch)",
+          teks: "Memutus/menyambung aliran ke lampu. Jenis: tunggal, seri (ganda), tukar (hotel), silang.",
+          gambar:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRorS5p5Jc7aHYKhy1tZDIHmsTUcFk6afGzjA&s",
+        },
+        {
+          ikon: "stopkontak",
+          nama: "Stop Kontak (Outlet)",
+          teks: "Titik sambungan untuk peralatan; gunakan tipe 3 lubang (berarde) untuk keamanan.",
+          gambar:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhiK03i3v6xlFn1uEMM1kE0ljO2cJVYP2KTw&s",
+        },
+        {
+          ikon: "steker",
+          nama: "Steker (Plug)",
+          teks: "Colokan pada ujung kabel peralatan yang dimasukkan ke stop kontak.",
+          gambar:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVgizs3n_AxvgqUjcKA49-DzVuVgYlp40Gm9fbEG7mJQ&s=10",
+        },
+        {
+          ikon: "kotaksambung",
+          nama: "Kotak Sambung (T-dus)",
+          teks: "Tempat penyambungan kabel agar rapi dan aman.",
+          gambar:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ-vkaYfoaq2QzTYVjwFWUaksETFuT6SPNFw&s",
+        },
       ],
     },
     {
@@ -267,10 +368,34 @@ const babKomponen: Bab = {
     {
       tipe: "komponen-list",
       items: [
-        { ikon: "fitting", nama: "Fitting Lampu", teks: "Dudukan tempat memasang lampu (fitting plafon/gantung).", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXxCoDho0-1yOw6lxjnF7KNw_vdmJOwrpJSw&s" },
-        { ikon: "lampu", nama: "Lampu", teks: "Beban penerangan (LED, TL, pijar).", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK8ShB-Bfox2G1T_oSe_r2jRHqGlU8TywI2w&s" },
-        { ikon: "kabel", nama: "Penghantar / Kabel", teks: "NYA (inti tunggal), NYM (berselubung 2–4 inti), NYY (untuk tanam tanah).", gambar: "https://kitani.co.id/wp-content/uploads/2025/08/kabel-NYA-NYM-dan-NYY.webp" },
-        { ikon: "pembumian", nama: "Pembumian (Arde)", teks: "Menyalurkan arus bocor ke bumi sebagai pengaman.", gambar: "https://filebroker-cdn.lazada.co.id/kf/S4dfbd680756a4cf19ec450fe9de1dd8eV.jpg" },
+        {
+          ikon: "fitting",
+          nama: "Fitting Lampu",
+          teks: "Dudukan tempat memasang lampu (fitting plafon/gantung).",
+          gambar:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXxCoDho0-1yOw6lxjnF7KNw_vdmJOwrpJSw&s",
+        },
+        {
+          ikon: "lampu",
+          nama: "Lampu",
+          teks: "Beban penerangan (LED, TL, pijar).",
+          gambar:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK8ShB-Bfox2G1T_oSe_r2jRHqGlU8TywI2w&s",
+        },
+        {
+          ikon: "kabel",
+          nama: "Penghantar / Kabel",
+          teks: "NYA (inti tunggal), NYM (berselubung 2–4 inti), NYY (untuk tanam tanah).",
+          gambar:
+            "https://kitani.co.id/wp-content/uploads/2025/08/kabel-NYA-NYM-dan-NYY.webp",
+        },
+        {
+          ikon: "pembumian",
+          nama: "Pembumian (Arde)",
+          teks: "Menyalurkan arus bocor ke bumi sebagai pengaman.",
+          gambar:
+            "https://filebroker-cdn.lazada.co.id/kf/S4dfbd680756a4cf19ec450fe9de1dd8eV.jpg",
+        },
       ],
     },
     {
@@ -302,7 +427,8 @@ const babSimbol: Bab = {
   no: 4,
   judul: "Simbol & Gambar Instalasi Listrik Rumah",
   ikon: "📐",
-  ringkasan: "Mengenal simbol baku PUIL, membaca diagram pengawatan, dan kode warna kabel.",
+  ringkasan:
+    "Mengenal simbol baku PUIL, membaca diagram pengawatan, dan kode warna kabel.",
   estimasiMenit: 12,
   tujuan: [
     "Mengenali simbol-simbol baku komponen listrik sesuai PUIL.",
@@ -358,7 +484,8 @@ const babTeknik: Bab = {
   no: 5,
   judul: "Teknik Pemasangan Instalasi Listrik",
   ikon: "🔌",
-  ringkasan: "Metode in-bow & out-bow, pembagian grup, teknik penyambungan kabel, dan langkah pemasangan.",
+  ringkasan:
+    "Metode in-bow & out-bow, pembagian grup, teknik penyambungan kabel, dan langkah pemasangan.",
   estimasiMenit: 16,
   tujuan: [
     "Membedakan metode pemasangan in-bow dan out-bow.",
@@ -375,11 +502,23 @@ const babTeknik: Bab = {
       tipe: "tabel",
       kolom: ["Aspek", "In-bow (Tanam)", "Out-bow (Luar)"],
       baris: [
-        ["Posisi kabel", "Di dalam dinding (pakai pipa konduit)", "Di permukaan dinding (pakai duct/pipa)"],
+        [
+          "Posisi kabel",
+          "Di dalam dinding (pakai pipa konduit)",
+          "Di permukaan dinding (pakai duct/pipa)",
+        ],
         ["Tampilan", "Rapi, tersembunyi", "Terlihat, kurang estetis"],
         ["Pemasangan", "Lebih sulit (perlu bobok dinding)", "Mudah & cepat"],
-        ["Cocok untuk", "Rumah baru / renovasi besar", "Renovasi ringan / bangunan jadi"],
-        ["Perawatan", "Sulit diakses bila bermasalah", "Mudah diperiksa & diganti"],
+        [
+          "Cocok untuk",
+          "Rumah baru / renovasi besar",
+          "Renovasi ringan / bangunan jadi",
+        ],
+        [
+          "Perawatan",
+          "Sulit diakses bila bermasalah",
+          "Mudah diperiksa & diganti",
+        ],
       ],
     },
     {
@@ -456,7 +595,8 @@ const babAlat: Bab = {
   no: 3,
   judul: "Alat Instalasi Listrik",
   ikon: "🔧",
-  ringkasan: "Daftar peralatan kerja (tools) yang dibutuhkan dalam instalasi listrik beserta fungsinya.",
+  ringkasan:
+    "Daftar peralatan kerja (tools) yang dibutuhkan dalam instalasi listrik beserta fungsinya.",
   estimasiMenit: 8,
   tujuan: [
     "Menyebutkan alat-alat kerja instalasi listrik beserta fungsinya.",
@@ -471,17 +611,17 @@ const babAlat: Bab = {
     {
       tipe: "komponen-list",
       items: [
-        { ikon: "obeng", nama: "Obeng (+ dan −) Berinsulasi", teks: "Memasang/melepas sekrup terminal & komponen.", gambar: "https://digipaysatu.kemenkeu.go.id/hotlink//digipay-assets/produk/2022/765498-obeng-plus-minus.png" },
-        { ikon: "tang-kombinasi", nama: "Tang Kombinasi", teks: "Memotong, menjepit, & memilin kabel.", gambar: "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//catalog-image/91/MTA-151013862/yukido_tang_kombinasi_9-_4in1_crimping_skun_kupas_kabel_potong_plier_yukido_full01_oxmxiwua.jpg" },
-        { ikon: "tang-potong", nama: "Tang Potong & Tang Lancip", teks: "Memotong kabel & menjangkau area sempit.", gambar: "https://image.powerindociptaenergy.id/s3/productimages/webp/co273485/p1458305/w600-h600/fbe8b1ab-47b3-4697-b50a-59f53f9c5f98w.jpg" },
-        { ikon: "stripper", nama: "Tang Pengupas (Stripper)", teks: "Mengupas isolasi kabel dengan rapi.", gambar: "https://storage.googleapis.com/eezee-product-images/force-6912160-insulated-wire-stripper-pliers-6-ir9o_600.png" },
-        { ikon: "tespen", nama: "Tespen", teks: "Mendeteksi ada/tidaknya tegangan secara cepat.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1d2HjySk5xG-wQ0JCm7XB-Vdh0VQZBNj-AA&s" },
-        { ikon: "multimeter", nama: "Multimeter / AVO Meter", teks: "Mengukur tegangan, arus, & tahanan.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxsBUuXQmGnABGw7nxM0dtdFDW0HIvSQB_sQ&s" },
-        { ikon: "megger", nama: "Megger", teks: "Mengukur tahanan isolasi instalasi.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6B3lQ0gM8SGyb7y-kR5cZZiBnOQs3rktgZw&s" },
-        { ikon: "bor", nama: "Bor Listrik & Mata Bor Beton", teks: "Melubangi dinding untuk jalur/fischer.", gambar: "https://www.parto.id/asset/foto_produk/ed67c1bfde0a7ee917287486e42bb843.jpg" },
-        { ikon: "palu", nama: "Palu & Pahat", teks: "Membobok dinding untuk jalur in-bow.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHmJ9nxq8qvd09GN6L3nJYvDrPXuRY47sQFQ&s" },
-        { ikon: "waterpass", nama: "Waterpass & Meteran", teks: "Memastikan pemasangan lurus & rata.", gambar: "https://img.lazcdn.com/g/p/8ba4fed4d102f6cefa39e4c4bd8d7342.jpg_720x720q80.jpg" },
-      ],
+  { ikon: "obeng", nama: "Obeng (+ dan −) Berinsulasi", teks: "Digunakan untuk memasang dan melepas sekrup pada terminal, saklar, stop kontak, serta berbagai komponen panel listrik. Gagangnya dilapisi bahan isolator sehingga aman digunakan meski bersentuhan dengan bagian yang bertegangan rendah. Wajib dimiliki dalam dua jenis mata, plus dan minus, untuk menyesuaikan jenis sekrup yang ditemui.", gambar: "https://digipaysatu.kemenkeu.go.id/hotlink//digipay-assets/produk/2022/765498-obeng-plus-minus.png" },
+  { ikon: "tang-kombinasi", nama: "Tang Kombinasi", teks: "Alat serbaguna yang berfungsi untuk memotong, menjepit, dan memilin kabel saat proses penyambungan instalasi. Bentuknya yang ergonomis memudahkan pekerjaan di ruang kerja yang terbatas maupun di lapangan. Tang ini menjadi salah satu alat inti yang hampir selalu digunakan di setiap tahap instalasi listrik.", gambar: "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//catalog-image/91/MTA-151013862/yukido_tang_kombinasi_9-_4in1_crimping_skun_kupas_kabel_potong_plier_yukido_full01_oxmxiwua.jpg" },
+  { ikon: "tang-potong", nama: "Tang Potong & Tang Lancip", teks: "Tang potong digunakan untuk memotong kabel dengan hasil yang rapi dan presisi sesuai kebutuhan panjang instalasi. Tang lancip membantu menjangkau area sempit seperti di dalam kotak sambung atau panel yang padat komponen. Kombinasi kedua alat ini memudahkan pekerjaan detail yang tidak bisa dijangkau tangan atau tang kombinasi biasa.", gambar: "https://image.powerindociptaenergy.id/s3/productimages/webp/co273485/p1458305/w600-h600/fbe8b1ab-47b3-4697-b50a-59f53f9c5f98w.jpg" },
+  { ikon: "stripper", nama: "Tang Pengupas (Stripper)", teks: "Berfungsi mengupas lapisan isolasi kabel secara rapi tanpa merusak konduktor tembaga di dalamnya. Alat ini memiliki beberapa ukuran lubang yang disesuaikan dengan diameter kabel yang berbeda-beda. Penggunaan stripper membuat hasil kupasan lebih konsisten dibanding menggunakan pisau atau tang biasa.", gambar: "https://storage.googleapis.com/eezee-product-images/force-6912160-insulated-wire-stripper-pliers-6-ir9o_600.png" },
+  { ikon: "tespen", nama: "Tespen", teks: "Alat sederhana namun penting untuk mendeteksi ada atau tidaknya tegangan listrik secara cepat sebelum menyentuh kabel atau komponen. Biasanya berbentuk obeng kecil dengan indikator lampu neon di ujungnya yang menyala saat mendeteksi arus. Menjadi langkah keselamatan awal yang wajib dilakukan sebelum memulai pekerjaan instalasi.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1d2HjySk5xG-wQ0JCm7XB-Vdh0VQZBNj-AA&s" },
+  { ikon: "multimeter", nama: "Multimeter / AVO Meter", teks: "Digunakan untuk mengukur besaran listrik seperti tegangan (Volt), arus (Ampere), dan tahanan (Ohm) dalam satu alat. Sangat berguna untuk memeriksa apakah instalasi bekerja sesuai standar keamanan dan mendiagnosis gangguan pada rangkaian. Multimeter tersedia dalam versi analog maupun digital, keduanya sama-sama umum digunakan oleh teknisi listrik.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxsBUuXQmGnABGw7nxM0dtdFDW0HIvSQB_sQ&s" },
+  { ikon: "megger", nama: "Megger", teks: "Alat khusus untuk mengukur tahanan isolasi pada kabel dan instalasi listrik guna mendeteksi potensi kebocoran arus. Pengukuran dilakukan dengan memberikan tegangan uji tinggi untuk memastikan lapisan isolasi masih dalam kondisi baik. Penggunaan megger sangat penting sebelum instalasi baru dinyalakan agar terhindar dari risiko korsleting atau bahaya listrik.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6B3lQ0gM8SGyb7y-kR5cZZiBnOQs3rktgZw&s" },
+  { ikon: "bor", nama: "Bor Listrik & Mata Bor Beton", teks: "Digunakan untuk melubangi dinding beton, bata, atau kayu sebagai jalur pemasangan pipa kabel maupun titik pemasangan fischer. Mata bor beton dirancang khusus agar mampu menembus material keras dengan hasil lubang yang presisi. Bor listrik mempercepat pekerjaan dibandingkan metode manual, terutama pada proyek instalasi berskala besar.", gambar: "https://www.parto.id/asset/foto_produk/ed67c1bfde0a7ee917287486e42bb843.jpg" },
+  { ikon: "palu", nama: "Palu & Pahat", teks: "Digunakan bersama-sama untuk membobok dinding saat membuat jalur instalasi model in-bow atau tanam. Pahat berfungsi mengarahkan dan memecah permukaan dinding, sementara palu memberikan tenaga pukulan yang dibutuhkan. Kombinasi alat ini masih sering digunakan meski sudah ada bor listrik, terutama untuk pekerjaan pembobokan yang lebih presisi.", gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHmJ9nxq8qvd09GN6L3nJYvDrPXuRY47sQFQ&s" },
+  { ikon: "waterpass", nama: "Waterpass & Meteran", teks: "Waterpass digunakan untuk memastikan posisi saklar, stop kontak, dan jalur kabel terpasang lurus serta rata secara horizontal maupun vertikal. Meteran membantu mengukur jarak dan panjang kabel atau pipa yang dibutuhkan sebelum pemotongan. Kedua alat ini memastikan hasil instalasi terlihat rapi dan sesuai dengan perencanaan awal.", gambar: "https://img.lazcdn.com/g/p/8ba4fed4d102f6cefa39e4c4bd8d7342.jpg_720x720q80.jpg" },
+],
     },
     {
       tipe: "info",
@@ -493,7 +633,14 @@ const babAlat: Bab = {
 };
 
 // Urutan tampil: pengertian → komponen → alat → simbol → teknik pemasangan → K3
-export const babList: Bab[] = [babPengertian, babKomponen, babAlat, babSimbol, babTeknik, babK3];
+export const babList: Bab[] = [
+  babPengertian,
+  babKomponen,
+  babAlat,
+  babSimbol,
+  babTeknik,
+  babK3,
+];
 
 // ── EVALUASI — 15 SOAL PILIHAN GANDA ─────────────────────────────────────────
 export interface SoalModul {
@@ -516,36 +663,54 @@ export const soalEvaluasi: SoalModul[] = [
       "Jenis lampu hemat energi",
     ],
     jawabanBenar: 1,
-    penjelasan: "Instalasi listrik adalah rangkaian peralatan dan perlengkapan listrik yang saling terhubung untuk menyalurkan, membagi, dan menggunakan energi listrik secara aman, andal, dan efisien.",
+    penjelasan:
+      "Instalasi listrik adalah rangkaian peralatan dan perlengkapan listrik yang saling terhubung untuk menyalurkan, membagi, dan menggunakan energi listrik secara aman, andal, dan efisien.",
     bab: 1,
   },
   {
     id: 2,
-    pertanyaan: "Standar yang menjadi acuan wajib instalasi listrik tegangan rendah di Indonesia adalah...",
-    pilihan: ["PUIL 2011 (SNI 0225:2011)", "ISO 9001", "SOP PLN 2020", "UU Pajak"],
+    pertanyaan:
+      "Standar yang menjadi acuan wajib instalasi listrik tegangan rendah di Indonesia adalah...",
+    pilihan: [
+      "PUIL 2011 (SNI 0225:2011)",
+      "ISO 9001",
+      "SOP PLN 2020",
+      "UU Pajak",
+    ],
     jawabanBenar: 0,
-    penjelasan: "PUIL 2011 (Persyaratan Umum Instalasi Listrik / SNI 0225:2011) adalah standar nasional yang wajib diikuti untuk semua instalasi listrik tegangan rendah, termasuk rumah tinggal.",
+    penjelasan:
+      "PUIL 2011 (Persyaratan Umum Instalasi Listrik / SNI 0225:2011) adalah standar nasional yang wajib diikuti untuk semua instalasi listrik tegangan rendah, termasuk rumah tinggal.",
     bab: 1,
   },
   {
     id: 3,
-    pertanyaan: "Dokumen yang menyatakan bahwa instalasi listrik laik/aman untuk dioperasikan disebut...",
+    pertanyaan:
+      "Dokumen yang menyatakan bahwa instalasi listrik aman untuk dioperasikan disebut...",
     pilihan: ["SIM", "SLO (Sertifikat Laik Operasi)", "STNK", "NPWP"],
     jawabanBenar: 1,
-    penjelasan: "SLO (Sertifikat Laik Operasi) adalah bukti bahwa instalasi sudah diperiksa dan dinyatakan aman. Tanpa SLO, PLN tidak akan menyambungkan listrik ke instalasi baru.",
+    penjelasan:
+      "SLO (Sertifikat Laik Operasi) adalah bukti bahwa instalasi sudah diperiksa dan dinyatakan aman. Tanpa SLO, PLN tidak akan menyambungkan listrik ke instalasi baru.",
     bab: 1,
   },
   {
     id: 4,
-    pertanyaan: "Berapa besar arus listrik yang sudah dapat membahayakan nyawa manusia jika melewati tubuh?",
-    pilihan: ["Sekitar 50 mA (0,05 A)", "Minimal 100 A", "Tepat 220 V", "Di atas 1000 watt"],
+    pertanyaan:
+      "Berapa besar arus listrik yang sudah dapat membahayakan nyawa manusia jika melewati tubuh?",
+    pilihan: [
+      "Sekitar 50 mA (0,05 A)",
+      "Minimal 100 A",
+      "Tepat 220 V",
+      "Di atas 1000 watt",
+    ],
     jawabanBenar: 0,
-    penjelasan: "Arus sekitar 50 mA (0,05 ampere) saja yang melewati tubuh sudah dapat menyebabkan kematian. Karena itu pengaman ELCB/RCCB yang peka 30 mA sangat dianjurkan.",
+    penjelasan:
+      "Arus sekitar 50 mA (0,05 ampere) saja yang melewati tubuh sudah dapat menyebabkan kematian. Karena itu pengaman ELCB/RCCB yang peka 30 mA sangat dianjurkan.",
     bab: 6,
   },
   {
     id: 5,
-    pertanyaan: "Langkah PERTAMA yang benar saat menemukan seseorang tersengat listrik adalah...",
+    pertanyaan:
+      "Langkah PERTAMA yang benar saat menemukan seseorang tersengat listrik adalah...",
     pilihan: [
       "Langsung menarik tubuh korban dengan tangan",
       "Menyiram korban dengan air",
@@ -553,7 +718,8 @@ export const soalEvaluasi: SoalModul[] = [
       "Memberi korban minum",
     ],
     jawabanBenar: 2,
-    penjelasan: "Matikan sumber listrik lebih dulu. Jangan menyentuh korban yang masih terhubung arus karena Anda bisa ikut tersengat. Setelah aman, beri pertolongan dan hubungi 119.",
+    penjelasan:
+      "Matikan sumber listrik lebih dulu. Jangan menyentuh korban yang masih terhubung arus karena Anda bisa ikut tersengat. Setelah aman, beri pertolongan dan hubungi 119.",
     bab: 6,
   },
   {
@@ -566,68 +732,94 @@ export const soalEvaluasi: SoalModul[] = [
       "Line Output — keluaran tegangan tinggi",
     ],
     jawabanBenar: 0,
-    penjelasan: "LOTO (Lockout–Tagout) adalah prosedur mengunci (lockout) dan menandai (tagout) sumber energi listrik agar tidak dinyalakan secara tidak sengaja saat teknisi sedang bekerja.",
+    penjelasan:
+      "LOTO (Lockout–Tagout) adalah prosedur mengunci (lockout) dan menandai (tagout) sumber energi listrik agar tidak dinyalakan secara tidak sengaja saat teknisi sedang bekerja.",
     bab: 6,
   },
   {
     id: 7,
-    pertanyaan: "Alat Pelindung Diri (APD) yang berfungsi mencegah arus mengalir ke tanah melalui tubuh adalah...",
-    pilihan: ["Topi biasa", "Sepatu safety berinsulasi", "Kaus tangan kain", "Kacamata hitam"],
+    pertanyaan:
+      "Alat Pelindung Diri (APD) yang berfungsi mencegah arus mengalir ke tanah melalui tubuh adalah...",
+    pilihan: [
+      "Topi biasa",
+      "Sepatu safety berinsulasi",
+      "Kaus tangan kain",
+      "Kacamata hitam",
+    ],
     jawabanBenar: 1,
-    penjelasan: "Sepatu safety berinsulasi mencegah tubuh menjadi jalur arus ke tanah (grounding tubuh), sehingga melindungi pekerja dari sengatan listrik.",
+    penjelasan:
+      "Sepatu safety berinsulasi mencegah tubuh menjadi jalur arus ke tanah (grounding tubuh), sehingga melindungi pekerja dari sengatan listrik.",
     bab: 6,
   },
   {
     id: 8,
-    pertanyaan: "Komponen yang memutus arus secara otomatis saat terjadi beban berlebih atau korsleting adalah...",
+    pertanyaan:
+      "Komponen yang memutus arus secara otomatis saat terjadi beban berlebih atau korsleting adalah...",
     pilihan: ["kWh meter", "Stop kontak", "MCB", "Fitting lampu"],
     jawabanBenar: 2,
-    penjelasan: "MCB (Miniature Circuit Breaker) memutus aliran listrik otomatis saat terjadi overload atau hubung singkat, mencegah kebakaran dan kerusakan.",
+    penjelasan:
+      "MCB (Miniature Circuit Breaker) memutus aliran listrik otomatis saat terjadi overload atau hubung singkat, mencegah kebakaran dan kerusakan.",
     bab: 2,
   },
   {
     id: 9,
-    pertanyaan: "Pengaman yang mampu mendeteksi kebocoran arus sekecil 30 mA untuk melindungi manusia dari sengatan adalah...",
+    pertanyaan:
+      "Pengaman yang mampu mendeteksi kebocoran arus sekecil 30 mA untuk melindungi manusia dari sengatan adalah...",
     pilihan: ["ELCB / RCCB", "Sekring 10 A", "Saklar tukar", "kWh meter"],
     jawabanBenar: 0,
-    penjelasan: "ELCB/RCCB mendeteksi arus bocor sekecil 30 mA dan langsung memutus daya, jauh lebih peka dari MCB biasa sehingga dapat melindungi nyawa manusia.",
+    penjelasan:
+      "ELCB/RCCB mendeteksi arus bocor sekecil 30 mA dan langsung memutus daya, jauh lebih peka dari MCB biasa sehingga dapat melindungi nyawa manusia.",
     bab: 2,
   },
   {
     id: 10,
-    pertanyaan: "Ukuran kabel NYM yang umum direkomendasikan untuk grup stop kontak (berarde) adalah...",
+    pertanyaan:
+      "Ukuran kabel NYM yang umum direkomendasikan untuk grup stop kontak (berarde) adalah...",
     pilihan: ["2 × 1,5 mm²", "3 × 2,5 mm²", "1 × 0,5 mm²", "4 × 10 mm²"],
     jawabanBenar: 1,
-    penjelasan: "NYM 3 × 2,5 mm² (3 inti: fasa, netral, arde) adalah ukuran standar untuk stop kontak, mampu menangani beban hingga ± 16 A.",
+    penjelasan:
+      "NYM 3 × 2,5 mm² (3 inti: fasa, netral, arde) adalah ukuran standar untuk stop kontak, mampu menangani beban hingga ± 16 A.",
     bab: 2,
   },
   {
     id: 11,
-    pertanyaan: "Berdasarkan kode warna SNI/PUIL, warna kabel untuk penghantar NETRAL adalah...",
+    pertanyaan:
+      "Berdasarkan kode warna SNI/PUIL, warna kabel untuk penghantar NETRAL adalah...",
     pilihan: ["Merah", "Biru", "Loreng kuning-hijau", "Hitam"],
     jawabanBenar: 1,
-    penjelasan: "Sesuai PUIL 2011, kabel BIRU dipakai untuk Netral (N), loreng kuning-hijau KHUSUS pembumian (PE), dan hitam/cokelat/merah untuk fasa (L).",
+    penjelasan:
+      "Sesuai PUIL 2011, kabel BIRU dipakai untuk Netral (N), loreng kuning-hijau KHUSUS pembumian (PE), dan hitam/cokelat/merah untuk fasa (L).",
     bab: 4,
   },
   {
     id: 12,
-    pertanyaan: "Warna kabel loreng kuning-hijau pada instalasi listrik digunakan KHUSUS untuk...",
-    pilihan: ["Fasa (L)", "Netral (N)", "Pembumian / grounding (PE)", "Kabel cadangan"],
+    pertanyaan:
+      "Warna kabel loreng kuning-hijau pada instalasi listrik digunakan KHUSUS untuk...",
+    pilihan: [
+      "Fasa (L)",
+      "Netral (N)",
+      "Pembumian / grounding (PE)",
+      "Kabel cadangan",
+    ],
     jawabanBenar: 2,
-    penjelasan: "Loreng kuning-hijau adalah warna baku untuk penghantar pembumian (PE). Warna ini tidak boleh dipakai untuk fungsi lain demi keselamatan.",
+    penjelasan:
+      "Loreng kuning-hijau adalah warna baku untuk penghantar pembumian (PE). Warna ini tidak boleh dipakai untuk fungsi lain demi keselamatan.",
     bab: 4,
   },
   {
     id: 13,
-    pertanyaan: "Metode pemasangan instalasi yang kabelnya ditanam di dalam dinding memakai pipa konduit disebut...",
+    pertanyaan:
+      "Metode pemasangan instalasi yang kabelnya ditanam di dalam dinding memakai pipa konduit disebut...",
     pilihan: ["Out-bow", "In-bow", "Overhead", "Wireless"],
     jawabanBenar: 1,
-    penjelasan: "In-bow (tanam) adalah metode memasang kabel di dalam dinding menggunakan pipa konduit, hasilnya rapi dan tersembunyi. Out-bow dipasang di permukaan dinding.",
+    penjelasan:
+      "In-bow (tanam) adalah metode memasang kabel di dalam dinding menggunakan pipa konduit, hasilnya rapi dan tersembunyi. Out-bow dipasang di permukaan dinding.",
     bab: 5,
   },
   {
     id: 14,
-    pertanyaan: "Mengapa instalasi rumah perlu dibagi menjadi beberapa grup yang masing-masing diamankan satu MCB?",
+    pertanyaan:
+      "Mengapa instalasi rumah perlu dibagi menjadi beberapa grup yang masing-masing diamankan satu MCB?",
     pilihan: [
       "Agar tagihan listrik lebih murah",
       "Supaya bila satu grup bermasalah, grup lain tetap menyala & beban merata",
@@ -635,15 +827,93 @@ export const soalEvaluasi: SoalModul[] = [
       "Karena diwajibkan membayar pajak",
     ],
     jawabanBenar: 1,
-    penjelasan: "Pembagian grup membuat instalasi lebih aman dan andal: jika satu grup trip/bermasalah, grup lain tetap menyala, dan beban listrik terdistribusi merata.",
+    penjelasan:
+      "Pembagian grup membuat instalasi lebih aman dan andal: jika satu grup trip/bermasalah, grup lain tetap menyala, dan beban listrik terdistribusi merata.",
     bab: 5,
   },
   {
     id: 15,
-    pertanyaan: "Alat yang digunakan untuk mengukur tahanan isolasi instalasi (minimal 1 MΩ) sebelum dialiri listrik adalah...",
+    pertanyaan:
+      "Alat yang digunakan untuk mengukur tahanan isolasi instalasi (minimal 1 MΩ) sebelum dialiri listrik adalah...",
     pilihan: ["Tespen", "Megger", "Palu", "Waterpass"],
     jawabanBenar: 1,
-    penjelasan: "Megger (insulation tester) mengukur tahanan isolasi instalasi. Sesuai PUIL, nilainya harus minimal 1 MΩ; di bawah itu menandakan kebocoran isolasi yang berbahaya.",
+    penjelasan:
+      "Megger (insulation tester) mengukur tahanan isolasi instalasi. Sesuai PUIL, nilainya harus minimal 1 MΩ; di bawah itu menandakan kebocoran isolasi yang berbahaya.",
     bab: 3,
+  },
+  {
+    id: 16,
+    pertanyaan:
+      "Alat yang paling tepat digunakan untuk mengupas isolasi kabel dengan hasil rapi tanpa merusak konduktor adalah...",
+    pilihan: [
+      "Tang pengupas (stripper)",
+      "Palu",
+      "Waterpass",
+      "kWh meter",
+    ],
+    jawabanBenar: 0,
+    penjelasan:
+      "Tang pengupas (stripper) dirancang khusus dengan lubang berbagai ukuran untuk mengupas lapisan isolasi kabel secara presisi tanpa menggores atau memutus konduktor tembaga di dalamnya.",
+    bab: 3,
+  },
+  {
+    id: 17,
+    pertanyaan:
+      "Fungsi utama tespen dalam pekerjaan instalasi listrik adalah...",
+    pilihan: [
+      "Mengukur tahanan isolasi",
+      "Mendeteksi ada atau tidaknya tegangan secara cepat",
+      "Memotong dan mengupas kabel",
+      "Melubangi dinding beton",
+    ],
+    jawabanBenar: 1,
+    penjelasan:
+      "Tespen berfungsi sebagai alat deteksi cepat untuk mengetahui apakah suatu titik atau kabel masih bertegangan, sehingga menjadi langkah keselamatan awal sebelum menyentuh komponen listrik.",
+    bab: 3,
+  },
+  {
+    id: 18,
+    pertanyaan:
+      "kWh meter berfungsi untuk...",
+    pilihan: [
+      "Memutus arus saat terjadi korsleting",
+      "Mencatat pemakaian energi listrik untuk penagihan",
+      "Mengukur tahanan isolasi kabel",
+      "Mendeteksi kebocoran arus ke tanah",
+    ],
+    jawabanBenar: 1,
+    penjelasan:
+      "kWh meter adalah alat ukur milik PLN yang mencatat jumlah energi listrik (kilowatt-hour) yang digunakan pelanggan, dan menjadi dasar perhitungan tagihan listrik bulanan.",
+    bab: 2,
+  },
+  {
+    id: 19,
+    pertanyaan:
+      "PHB (Perlengkapan Hubung Bagi) atau box panel berfungsi sebagai...",
+    pilihan: [
+      "Alat pengukur tegangan",
+      "Pusat distribusi listrik yang menampung MCB & pengaman lain",
+      "Pengganti kWh meter",
+      "Alat pelindung diri pekerja",
+    ],
+    jawabanBenar: 1,
+    penjelasan:
+      "PHB adalah kotak yang menjadi pusat distribusi listrik rumah, tempat MCB dan komponen pengaman lain dipasang untuk membagi arus ke berbagai jalur sirkuit instalasi.",
+    bab: 2,
+  },
+  {
+    id: 20,
+    pertanyaan:
+      "Salah satu alasan sekring (fuse) model lama kini banyak digantikan oleh MCB adalah...",
+    pilihan: [
+      "Sekring lebih murah dari MCB",
+      "Sekring yang putus harus diganti baru, sedangkan MCB tinggal di-reset",
+      "Sekring lebih peka mendeteksi kebocoran arus",
+      "Sekring tidak memerlukan pemasangan di PHB",
+    ],
+    jawabanBenar: 1,
+    penjelasan:
+      "Sekring bekerja dengan meleburnya kawat saat arus berlebih sehingga harus diganti setelah putus, sementara MCB cukup di-reset kembali setelah trip, membuatnya lebih praktis dan efisien.",
+    bab: 2,
   },
 ];

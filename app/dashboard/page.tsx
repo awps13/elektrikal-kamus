@@ -2,6 +2,7 @@ import Link from "next/link";
 import { requireUser } from "../lib/dal";
 import { logout } from "../actions/auth";
 import { prisma } from "../lib/db";
+import DeleteQuizResultButton from "./DeleteQuizResultButton";
 import GuruSettings from "./GuruSettings";
 
 function fmtTanggal(d: Date) {
@@ -99,6 +100,7 @@ async function GuruView() {
                   <th className="px-5 py-3 font-semibold">Skor</th>
                   <th className="px-5 py-3 font-semibold">Nilai</th>
                   <th className="px-5 py-3 font-semibold">Waktu</th>
+                  <th className="px-5 py-3 font-semibold">Aksi</th>
                 </tr>
               </thead>
               <tbody>
@@ -110,6 +112,9 @@ async function GuruView() {
                     <td className="px-5 py-3 text-gray-700">{r.score}/{r.total}</td>
                     <td className="px-5 py-3"><span className={`px-2.5 py-1 rounded-full text-xs font-bold ${warnaNilai(r.percentage)}`}>{r.percentage}</span></td>
                     <td className="px-5 py-3 text-gray-500 whitespace-nowrap">{fmtTanggal(r.createdAt)}</td>
+                    <td className="px-5 py-3">
+                      <DeleteQuizResultButton resultId={r.id} studentName={r.user.name} />
+                    </td>
                   </tr>
                 ))}
               </tbody>

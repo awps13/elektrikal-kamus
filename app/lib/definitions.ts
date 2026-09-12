@@ -32,6 +32,11 @@ export const ChangePasswordSchema = z
     path: ["confirmPassword"],
   });
 
+// Guru menghapus data hasil ujian murid dari dashboard.
+export const DeleteQuizResultSchema = z.object({
+  resultId: z.string().min(1, "Data nilai tidak valid.").trim(),
+});
+
 // ── State hasil form (untuk useActionState) ──────────────────────────────────
 export type FormState =
   | {

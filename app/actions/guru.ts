@@ -1,9 +1,10 @@
 "use server";
 
 import bcrypt from "bcryptjs";
+import { revalidatePath } from "next/cache";
 import { prisma } from "../lib/db";
 import { verifySession } from "../lib/dal";
-import { AddGuruSchema, ChangePasswordSchema, type FormState } from "../lib/definitions";
+import { AddGuruSchema, ChangePasswordSchema, DeleteQuizResultSchema, type FormState } from "../lib/definitions";
 import { zodErrors } from "../lib/form";
 
 // ── Tambah akun guru (hanya guru) ────────────────────────────────────────────
@@ -78,5 +79,35 @@ export async function changePassword(_state: FormState, formData: FormData): Pro
   } catch (err) {
     console.error("changePassword error", err);
     return { ok: false, message: "Gagal mengubah kata sandi. Coba lagi." };
+  }
+}
+
+// ── Hapus hasil ujian murid (hanya guru) ─────────────────────────────────────
+export async function deleteQuizResult(_state: FormState, formData: FormData): Promise<FormState> {
+  const session = await verifySession();
+  if (!session || session.role !== "GURU") {
+    return { ok: false, message: "Tidak diizinkan." };
+  }
+
+  const parsed = DeleteQuizResultSchema.safeParse({
+    resultId: formData.get("resultId"),
+  });
+  if (!parsed.success) {
+    return { ok: false, errors: zodErrors(parsed.error), message: "Data nilai tidak valid." };
+  }
+
+  try {
+    const deleted = await prisma.quizResult.deleteMany({
+      where: { id: parsed.data.resultId },
+    });
+    if (deleted.count === 0) {
+      return { ok: false, message: "Data nilai tidak ditemukan." };
+    }
+
+    revalidatePath("/dashboard");
+    return { ok: true, message: "Data hasil ujian berhasil dihapus." };
+  } catch (err) {
+    console.error("deleteQuizResult error", err);
+    return { ok: false, message: "Gagal menghapus data nilai. Coba lagi." };
   }
 }

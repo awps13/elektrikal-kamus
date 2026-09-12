@@ -642,12 +642,12 @@ export const babList: Bab[] = [
   babK3,
 ];
 
-// ── EVALUASI — 15 SOAL PILIHAN GANDA ─────────────────────────────────────────
+// ── EVALUASI — 20 SOAL PILIHAN GANDA (A–E) ───────────────────────────────────
 export interface SoalModul {
   id: number;
   pertanyaan: string;
-  pilihan: string[];
-  jawabanBenar: number; // indeks 0–3
+  pilihan: string[]; // 5 pilihan: indeks 0=A, 1=B, 2=C, 3=D, 4=E
+  jawabanBenar: number; // indeks 0–4
   penjelasan: string;
   bab: number; // bab terkait
 }
@@ -661,6 +661,7 @@ export const soalEvaluasi: SoalModul[] = [
       "Rangkaian peralatan listrik untuk menyalurkan & menggunakan energi listrik secara aman",
       "Tagihan listrik bulanan dari PLN",
       "Jenis lampu hemat energi",
+      "Sistem keamanan rumah otomatis berbasis sensor",
     ],
     jawabanBenar: 1,
     penjelasan:
@@ -676,6 +677,7 @@ export const soalEvaluasi: SoalModul[] = [
       "ISO 9001",
       "SOP PLN 2020",
       "UU Pajak",
+      "SNI ISO 50001 (manajemen energi)",
     ],
     jawabanBenar: 0,
     penjelasan:
@@ -686,7 +688,7 @@ export const soalEvaluasi: SoalModul[] = [
     id: 3,
     pertanyaan:
       "Dokumen yang menyatakan bahwa instalasi listrik aman untuk dioperasikan disebut...",
-    pilihan: ["SIM", "SLO (Sertifikat Laik Operasi)", "STNK", "NPWP"],
+    pilihan: ["SIM", "SLO (Sertifikat Laik Operasi)", "STNK", "NPWP", "IMB (Izin Mendirikan Bangunan)"],
     jawabanBenar: 1,
     penjelasan:
       "SLO (Sertifikat Laik Operasi) adalah bukti bahwa instalasi sudah diperiksa dan dinyatakan aman. Tanpa SLO, PLN tidak akan menyambungkan listrik ke instalasi baru.",
@@ -701,6 +703,7 @@ export const soalEvaluasi: SoalModul[] = [
       "Minimal 100 A",
       "Tepat 220 V",
       "Di atas 1000 watt",
+      "Sekitar 500 mA (0,5 A)",
     ],
     jawabanBenar: 0,
     penjelasan:
@@ -716,6 +719,7 @@ export const soalEvaluasi: SoalModul[] = [
       "Menyiram korban dengan air",
       "Mematikan sumber listrik terlebih dahulu",
       "Memberi korban minum",
+      "Menunggu dan memanggil tetangga terlebih dahulu",
     ],
     jawabanBenar: 2,
     penjelasan:
@@ -730,6 +734,7 @@ export const soalEvaluasi: SoalModul[] = [
       "Load On Time Off — mengatur jadwal pemakaian listrik",
       "Light Off Turn On — menyalakan lampu otomatis",
       "Line Output — keluaran tegangan tinggi",
+      "Lock On Turn Off — mengunci saklar pada posisi menyala",
     ],
     jawabanBenar: 0,
     penjelasan:
@@ -745,6 +750,7 @@ export const soalEvaluasi: SoalModul[] = [
       "Sepatu safety berinsulasi",
       "Kaus tangan kain",
       "Kacamata hitam",
+      "Sarung tangan kain biasa (non-isolasi)",
     ],
     jawabanBenar: 1,
     penjelasan:
@@ -755,17 +761,17 @@ export const soalEvaluasi: SoalModul[] = [
     id: 8,
     pertanyaan:
       "Komponen yang memutus arus secara otomatis saat terjadi beban berlebih atau korsleting adalah...",
-    pilihan: ["kWh meter", "Stop kontak", "MCB", "Fitting lampu"],
+    pilihan: ["kWh meter", "Stop kontak", "MCB", "Fitting lampu", "ELCB/RCCB"],
     jawabanBenar: 2,
     penjelasan:
-      "MCB (Miniature Circuit Breaker) memutus aliran listrik otomatis saat terjadi overload atau hubung singkat, mencegah kebakaran dan kerusakan.",
+      "MCB (Miniature Circuit Breaker) memutus aliran listrik otomatis saat terjadi overload atau hubung singkat, mencegah kebakaran dan kerusakan. ELCB/RCCB bekerja berdasarkan kebocoran arus, bukan beban lebih.",
     bab: 2,
   },
   {
     id: 9,
     pertanyaan:
       "Pengaman yang mampu mendeteksi kebocoran arus sekecil 30 mA untuk melindungi manusia dari sengatan adalah...",
-    pilihan: ["ELCB / RCCB", "Sekring 10 A", "Saklar tukar", "kWh meter"],
+    pilihan: ["ELCB / RCCB", "Sekring 10 A", "Saklar tukar", "kWh meter", "MCB 16 A"],
     jawabanBenar: 0,
     penjelasan:
       "ELCB/RCCB mendeteksi arus bocor sekecil 30 mA dan langsung memutus daya, jauh lebih peka dari MCB biasa sehingga dapat melindungi nyawa manusia.",
@@ -775,17 +781,17 @@ export const soalEvaluasi: SoalModul[] = [
     id: 10,
     pertanyaan:
       "Ukuran kabel NYM yang umum direkomendasikan untuk grup stop kontak (berarde) adalah...",
-    pilihan: ["2 × 1,5 mm²", "3 × 2,5 mm²", "1 × 0,5 mm²", "4 × 10 mm²"],
+    pilihan: ["2 × 1,5 mm²", "3 × 2,5 mm²", "1 × 0,5 mm²", "4 × 10 mm²", "NYM 2 × 2,5 mm² (tanpa inti arde)"],
     jawabanBenar: 1,
     penjelasan:
-      "NYM 3 × 2,5 mm² (3 inti: fasa, netral, arde) adalah ukuran standar untuk stop kontak, mampu menangani beban hingga ± 16 A.",
+      "NYM 3 × 2,5 mm² (3 inti: fasa, netral, arde) adalah ukuran standar untuk stop kontak, mampu menangani beban hingga ± 16 A. Kabel 2 inti tidak menyediakan jalur pembumian.",
     bab: 2,
   },
   {
     id: 11,
     pertanyaan:
       "Berdasarkan kode warna SNI/PUIL, warna kabel untuk penghantar NETRAL adalah...",
-    pilihan: ["Merah", "Biru", "Loreng kuning-hijau", "Hitam"],
+    pilihan: ["Merah", "Biru", "Loreng kuning-hijau", "Hitam", "Putih"],
     jawabanBenar: 1,
     penjelasan:
       "Sesuai PUIL 2011, kabel BIRU dipakai untuk Netral (N), loreng kuning-hijau KHUSUS pembumian (PE), dan hitam/cokelat/merah untuk fasa (L).",
@@ -800,6 +806,7 @@ export const soalEvaluasi: SoalModul[] = [
       "Netral (N)",
       "Pembumian / grounding (PE)",
       "Kabel cadangan",
+      "Netral cadangan (N2)",
     ],
     jawabanBenar: 2,
     penjelasan:
@@ -810,10 +817,10 @@ export const soalEvaluasi: SoalModul[] = [
     id: 13,
     pertanyaan:
       "Metode pemasangan instalasi yang kabelnya ditanam di dalam dinding memakai pipa konduit disebut...",
-    pilihan: ["Out-bow", "In-bow", "Overhead", "Wireless"],
+    pilihan: ["Out-bow", "In-bow", "Overhead", "Wireless", "Ducting permukaan"],
     jawabanBenar: 1,
     penjelasan:
-      "In-bow (tanam) adalah metode memasang kabel di dalam dinding menggunakan pipa konduit, hasilnya rapi dan tersembunyi. Out-bow dipasang di permukaan dinding.",
+      "In-bow (tanam) adalah metode memasang kabel di dalam dinding menggunakan pipa konduit, hasilnya rapi dan tersembunyi. Out-bow/ducting dipasang di permukaan dinding.",
     bab: 5,
   },
   {
@@ -825,6 +832,7 @@ export const soalEvaluasi: SoalModul[] = [
       "Supaya bila satu grup bermasalah, grup lain tetap menyala & beban merata",
       "Agar warna kabel lebih beragam",
       "Karena diwajibkan membayar pajak",
+      "Semata-mata supaya tampilan box panel lebih rapi secara visual",
     ],
     jawabanBenar: 1,
     penjelasan:
@@ -835,10 +843,10 @@ export const soalEvaluasi: SoalModul[] = [
     id: 15,
     pertanyaan:
       "Alat yang digunakan untuk mengukur tahanan isolasi instalasi (minimal 1 MΩ) sebelum dialiri listrik adalah...",
-    pilihan: ["Tespen", "Megger", "Palu", "Waterpass"],
+    pilihan: ["Tespen", "Megger", "Palu", "Waterpass", "Multimeter biasa"],
     jawabanBenar: 1,
     penjelasan:
-      "Megger (insulation tester) mengukur tahanan isolasi instalasi. Sesuai PUIL, nilainya harus minimal 1 MΩ; di bawah itu menandakan kebocoran isolasi yang berbahaya.",
+      "Megger (insulation tester) mengukur tahanan isolasi instalasi dengan tegangan uji tinggi. Sesuai PUIL, nilainya harus minimal 1 MΩ; multimeter biasa tidak dirancang untuk pengujian ini.",
     bab: 3,
   },
   {
@@ -850,10 +858,11 @@ export const soalEvaluasi: SoalModul[] = [
       "Palu",
       "Waterpass",
       "kWh meter",
+      "Tang kombinasi",
     ],
     jawabanBenar: 0,
     penjelasan:
-      "Tang pengupas (stripper) dirancang khusus dengan lubang berbagai ukuran untuk mengupas lapisan isolasi kabel secara presisi tanpa menggores atau memutus konduktor tembaga di dalamnya.",
+      "Tang pengupas (stripper) dirancang khusus dengan lubang berbagai ukuran untuk mengupas lapisan isolasi kabel secara presisi tanpa menggores atau memutus konduktor tembaga di dalamnya. Tang kombinasi bisa memotong/menjepit tapi kurang presisi untuk mengupas.",
     bab: 3,
   },
   {
@@ -865,6 +874,7 @@ export const soalEvaluasi: SoalModul[] = [
       "Mendeteksi ada atau tidaknya tegangan secara cepat",
       "Memotong dan mengupas kabel",
       "Melubangi dinding beton",
+      "Mengukur besar arus listrik dalam ampere",
     ],
     jawabanBenar: 1,
     penjelasan:
@@ -880,6 +890,7 @@ export const soalEvaluasi: SoalModul[] = [
       "Mencatat pemakaian energi listrik untuk penagihan",
       "Mengukur tahanan isolasi kabel",
       "Mendeteksi kebocoran arus ke tanah",
+      "Menyalakan dan mematikan aliran listrik utama secara manual",
     ],
     jawabanBenar: 1,
     penjelasan:
@@ -895,6 +906,7 @@ export const soalEvaluasi: SoalModul[] = [
       "Pusat distribusi listrik yang menampung MCB & pengaman lain",
       "Pengganti kWh meter",
       "Alat pelindung diri pekerja",
+      "Tempat penyimpanan kabel cadangan",
     ],
     jawabanBenar: 1,
     penjelasan:
@@ -910,10 +922,11 @@ export const soalEvaluasi: SoalModul[] = [
       "Sekring yang putus harus diganti baru, sedangkan MCB tinggal di-reset",
       "Sekring lebih peka mendeteksi kebocoran arus",
       "Sekring tidak memerlukan pemasangan di PHB",
+      "Sekring bekerja secara elektronik, sedangkan MCB bekerja secara mekanis",
     ],
     jawabanBenar: 1,
     penjelasan:
-      "Sekring bekerja dengan meleburnya kawat saat arus berlebih sehingga harus diganti setelah putus, sementara MCB cukup di-reset kembali setelah trip, membuatnya lebih praktis dan efisien.",
+      "Sekring bekerja dengan meleburnya kawat saat arus berlebih sehingga harus diganti setelah putus, sementara MCB cukup di-reset kembali setelah trip (bekerja mekanis via bimetal/elektromagnetik), membuatnya lebih praktis dan efisien.",
     bab: 2,
   },
 ];

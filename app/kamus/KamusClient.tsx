@@ -178,7 +178,7 @@ function KuisSection() {
           return (
             <button key={i} onClick={() => pilihJawaban(i)} disabled={dipilih !== null}
               className={`w-full text-left px-4 py-3 rounded-xl border-2 text-sm font-medium transition-all ${cls}`}>
-              <span className="font-bold mr-2">{["A","B","C","D"][i]}.</span>{p}
+              <span className="font-bold mr-2">{["A","B","C","D","E"][i]}.</span>{p}
               {dipilih !== null && i === soal.jawabanBenar && <span className="float-right">✅</span>}
               {dipilih !== null && i === dipilih && i !== soal.jawabanBenar && <span className="float-right">❌</span>}
             </button>

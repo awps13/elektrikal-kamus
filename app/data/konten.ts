@@ -321,8 +321,8 @@ export type SoalKategori = Kategori | "umum";
 export interface Soal {
   id: number;
   pertanyaan: string;
-  pilihan: string[];
-  jawabanBenar: number;
+  pilihan: string[]; // 5 pilihan: indeks 0=A, 1=B, 2=C, 3=D, 4=E
+  jawabanBenar: number; // indeks 0–4
   penjelasan: string;
   kategori: SoalKategori;
 }
@@ -336,6 +336,7 @@ export const soalKuis: Soal[] = [
       "Memutus arus otomatis saat terjadi overload atau korsleting",
       "Menyalurkan listrik dari PLN ke rumah",
       "Menghemat pemakaian listrik",
+      "Menyimpan cadangan listrik saat terjadi pemadaman",
     ],
     jawabanBenar: 1,
     penjelasan: "MCB berfungsi sebagai pengaman yang memutus aliran listrik secara otomatis ketika terjadi arus berlebih (overload) atau hubungan singkat (short circuit) untuk mencegah kebakaran.",
@@ -344,7 +345,7 @@ export const soalKuis: Soal[] = [
   {
     id: 2,
     pertanyaan: "Kode warna kabel apa yang digunakan untuk konduktor NETRAL (N) berdasarkan SNI?",
-    pilihan: ["Merah", "Hijau-Kuning", "Biru", "Hitam"],
+    pilihan: ["Merah", "Hijau-Kuning", "Biru", "Hitam", "Putih"],
     jawabanBenar: 2,
     penjelasan: "Berdasarkan SNI dan standar instalasi Indonesia, kabel berwarna BIRU digunakan untuk konduktor Netral (N). Merah/Hitam untuk Fasa, Hijau-Kuning untuk Grounding.",
     kategori: "teknik",
@@ -357,9 +358,10 @@ export const soalKuis: Soal[] = [
       "Khusus untuk lampu LED saja",
       "Dapat mendeteksi kebocoran arus sekecil 30mA, melindungi dari sengatan listrik",
       "Digunakan di panel listrik luar ruangan saja",
+      "Hanya digunakan pada instalasi listrik industri besar",
     ],
     jawabanBenar: 2,
-    penjelasan: "ELCB/RCCB mampu mendeteksi arus bocor sekecil 30mA dan langsung memutus daya. Ini jauh lebih sensitif dari MCB biasa sehingga dapat melindungi manusia dari sengatan listrik yang mematikan.",
+    penjelasan: "ELCB/RCCB mampu mendeteksi arus bocor sekecil 30mA dan langsung memutus daya. Ini jauh lebih sensitif dari MCB biasa sehingga dapat melindungi manusia dari sengatan listrik yang mematikan, dan sangat dianjurkan juga untuk rumah tinggal.",
     kategori: "komponen",
   },
   {
@@ -370,6 +372,7 @@ export const soalKuis: Soal[] = [
       "Siramkan air ke korban untuk meredam listrik",
       "Matikan sumber listrik terlebih dahulu",
       "Pukul korban agar tersadar",
+      "Menunggu korban sadar sendiri sebelum bertindak",
     ],
     jawabanBenar: 2,
     penjelasan: "Langkah PERTAMA adalah MATIKAN sumber listrik. Jangan pernah menyentuh korban saat masih terhubung arus karena Anda bisa ikut tersengat. Setelah aman, bantu korban dan hubungi 119.",
@@ -383,6 +386,7 @@ export const soalKuis: Soal[] = [
       "Kabel dimasukkan ke pipa konduit PVC sebelum ditanam",
       "Kabel dibungkus isolasi biasa lalu ditanam",
       "Kabel dipasang di permukaan luar dinding",
+      "Kabel ditanam langsung dengan pipa besi tanpa lapisan isolasi tambahan",
     ],
     jawabanBenar: 1,
     penjelasan: "Instalasi in-bow (tanam) yang benar mensyaratkan kabel dimasukkan ke dalam pipa konduit PVC terlebih dahulu sebelum ditanam. Ini melindungi kabel dan memudahkan penggantian di masa depan.",
@@ -396,6 +400,7 @@ export const soalKuis: Soal[] = [
       "Persyaratan Umum Instalasi Listrik – standar nasional wajib untuk instalasi listrik",
       "Peraturan Umum Industri Listrik – untuk industri pabrik saja",
       "Program Utama Instalasi Listrik – program pemerintah subsidi",
+      "Prosedur Umum Instalasi Listrik – pedoman internal PLN saja",
     ],
     jawabanBenar: 1,
     penjelasan: "PUIL adalah Persyaratan Umum Instalasi Listrik, merupakan standar SNI yang wajib diikuti untuk semua instalasi listrik tegangan rendah termasuk rumah tinggal. Versi terbaru adalah PUIL 2011.",
@@ -404,9 +409,9 @@ export const soalKuis: Soal[] = [
   {
     id: 7,
     pertanyaan: "Berapa ukuran kabel NYM yang direkomendasikan untuk titik stop kontak dengan grounding?",
-    pilihan: ["NYM 2×1,5mm²", "NYM 3×2,5mm²", "NYM 2×4mm²", "NYA 1×1mm²"],
+    pilihan: ["NYM 2×1,5mm²", "NYM 3×2,5mm²", "NYM 2×4mm²", "NYA 1×1mm²", "NYM 3×1,5mm²"],
     jawabanBenar: 1,
-    penjelasan: "NYM 3×2,5mm² adalah ukuran standar untuk stop kontak: 3 inti (fasa, netral, grounding), masing-masing 2,5mm² yang mampu menangani beban hingga ~16A.",
+    penjelasan: "NYM 3×2,5mm² adalah ukuran standar untuk stop kontak: 3 inti (fasa, netral, grounding), masing-masing 2,5mm² yang mampu menangani beban hingga ~16A. Ukuran 1,5mm² lebih cocok untuk titik lampu, bukan stop kontak.",
     kategori: "alat-bahan",
   },
   {
@@ -417,9 +422,10 @@ export const soalKuis: Soal[] = [
       "Mencegah listrik menyala tiba-tiba saat teknisi sedang bekerja",
       "Menandai komponen yang baru diganti",
       "Prosedur saat PLN melakukan pemadaman",
+      "Mematikan listrik secara permanen setelah pekerjaan selesai",
     ],
     jawabanBenar: 1,
-    penjelasan: "LOTO adalah prosedur keselamatan untuk mengunci dan menandai sumber energi sehingga tidak bisa dinyalakan secara tidak sengaja saat teknisi sedang bekerja, mencegah kecelakaan fatal.",
+    penjelasan: "LOTO adalah prosedur keselamatan untuk mengunci dan menandai sumber energi sehingga tidak bisa dinyalakan secara tidak sengaja saat teknisi sedang bekerja, mencegah kecelakaan fatal. Setelah pekerjaan selesai, gembok/tag dilepas dan listrik dinyalakan kembali seperti biasa.",
     kategori: "k3",
   },
   {
@@ -430,17 +436,18 @@ export const soalKuis: Soal[] = [
       "Syarat dari PLN untuk semua rumah",
       "Bila satu grup bermasalah, grup lain tetap menyala dan beban terdistribusi merata",
       "Agar MCB lebih awet dan tidak cepat rusak",
+      "Supaya total panjang kabel yang digunakan lebih sedikit",
     ],
     jawabanBenar: 2,
-    penjelasan: "Pembagian grup memastikan ketika satu sirkuit (misalnya dapur) bermasalah dan MCB-nya trip, lampu dan stop kontak di ruangan lain tetap menyala. Ini juga membuat distribusi beban lebih merata.",
+    penjelasan: "Pembagian grup memastikan ketika satu sirkuit (misalnya dapur) bermasalah dan MCB-nya trip, lampu dan stop kontak di ruangan lain tetap menyala. Ini juga membuat distribusi beban lebih merata, bukan untuk menghemat kabel.",
     kategori: "teknik",
   },
   {
     id: 10,
     pertanyaan: "Alat apa yang digunakan untuk mendeteksi apakah ada tegangan listrik pada suatu titik secara cepat?",
-    pilihan: ["Tang Kombinasi", "Bor Listrik", "Tespen (Test Pen)", "Klem Kabel"],
+    pilihan: ["Tang Kombinasi", "Bor Listrik", "Tespen (Test Pen)", "Klem Kabel", "Megger"],
     jawabanBenar: 2,
-    penjelasan: "Tespen (Test Pen) adalah alat sederhana berbentuk obeng yang menyala ketika ujungnya menyentuh titik bertegangan. Sangat penting untuk verifikasi keamanan sebelum bekerja.",
+    penjelasan: "Tespen (Test Pen) adalah alat sederhana berbentuk obeng yang menyala ketika ujungnya menyentuh titik bertegangan. Sangat penting untuk verifikasi keamanan sebelum bekerja. Megger digunakan untuk mengukur tahanan isolasi, bukan deteksi cepat ada/tidaknya tegangan.",
     kategori: "alat-bahan",
   },
 ];
